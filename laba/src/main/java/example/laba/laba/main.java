@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public class main extends ActionBarActivity {
     ImageView iconoPrincipal;
     TextView textoBienvenida;
     Button botonIniciar;
+    EditText edituser,editpassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,8 @@ public class main extends ActionBarActivity {
         iconoPrincipal=(ImageView)findViewById(R.id.imageView_inicial);
         textoBienvenida=(TextView)findViewById(R.id.textView_bienvenida);
         botonIniciar=(Button)findViewById(R.id.button);
+        edituser=(EditText)findViewById(R.id.editText_user);
+        editpassword=(EditText)findViewById(R.id.editText_pass);
 
         //agregar animacion inicial
         Animation mostrar;
@@ -40,8 +44,16 @@ public class main extends ActionBarActivity {
         botonIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent iniciarPrueba=new Intent(main.this,cprueba.class);
-                startActivity(iniciarPrueba);
+                if(edituser.getText().toString().equals("alumno")){
+                    Intent iniciarAlumno=new Intent(main.this,alumno.class);
+                    startActivity(iniciarAlumno);
+                }else if(edituser.getText().toString().equals("admi")){
+                    Intent iniciarAdmi=new Intent(main.this,administrador.class);
+                    startActivity(iniciarAdmi);
+                }
+
+
+
             }
         });
     }

@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:text="Usuario:"
             android:id="@+id/textView"
-            android:layout_alignBottom="@+id/editText"
+            android:layout_alignBottom="@+id/editText_user"
             android:layout_toLeftOf="@+id/button" />
 
         <TextView
@@ -68,19 +68,19 @@
         <EditText
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
+            android:id="@+id/editText_user"
             android:textSize="14dp"
             android:paddingRight="30dp"
-            android:layout_above="@+id/editText2"
+            android:layout_above="@+id/editText_pass"
             android:layout_toRightOf="@+id/textView2" />
 
         <EditText
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:id="@+id/editText2"
+            android:id="@+id/editText_pass"
             android:layout_alignBottom="@+id/textView2"
-            android:layout_alignLeft="@+id/editText"
-            android:layout_alignStart="@+id/editText"
+            android:layout_alignLeft="@+id/editText_user"
+            android:layout_alignStart="@+id/editText_user"
             android:textSize="14dp"
             android:paddingRight="30dp"
             android:password="true" />
