@@ -31,7 +31,7 @@
 
         <activity
             android:name="example.laba.laba.alumno"
-            android:label="Panel de Control - Alumno"
+            android:label="PANEL DE CONTROL"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.ALUMNO" />
@@ -42,7 +42,7 @@
 
         <activity
             android:name="example.laba.laba.administrador"
-            android:label="PANEL DE CONTROL - ADMINISTRADOR"
+            android:label="PANEL DE CONTROL"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.ADMINISTRADOR" />

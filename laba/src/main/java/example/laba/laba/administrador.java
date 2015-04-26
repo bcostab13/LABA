@@ -18,9 +18,9 @@ public class administrador extends Activity{
         setContentView(R.layout.activity_administrador);
 
         //asociamos
-        izquierdo=(Button)findViewById(R.id.buttonprueba);
-        derecho=(Button)findViewById(R.id.buttonprueba2);
-        izquierdo2=(Button)findViewById(R.id.buttonprueba3);
+        izquierdo=(Button)findViewById(R.id.buttonOpNIncidencia);
+        derecho=(Button)findViewById(R.id.buttonOpContSolicitud);
+        izquierdo2=(Button)findViewById(R.id.buttonOpContLabo);
 
         Animation mov_izquierda;
         mov_izquierda= AnimationUtils.loadAnimation(this, R.animator.ladoizquierdo);

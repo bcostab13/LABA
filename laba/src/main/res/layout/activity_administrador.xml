@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Operaciones"
-            android:id="@+id/textViewAdmi"
+            android:id="@+id/textViewOperaciones"
             android:layout_marginTop="15dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -30,12 +30,13 @@
             android:textSize="18dp"/>
 
         <TextView
+            android:id="@+id/textViewIndicacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Seleccione la tarea a realizar"
-            android:layout_below="@+id/textViewAdmi"
-            android:layout_alignLeft="@+id/textViewAdmi"
-            android:layout_alignStart="@+id/textViewAdmi"
+            android:layout_below="@+id/textViewOperaciones"
+            android:layout_alignLeft="@+id/textViewOperaciones"
+            android:layout_alignStart="@+id/textViewOperaciones"
             android:layout_marginTop="10dp"
             android:textSize="16dp"/>
 
@@ -48,7 +49,7 @@
         android:weightSum="1">
 
         <Button
-            android:id="@+id/buttonprueba"
+            android:id="@+id/buttonOpNIncidencia"
             android:layout_width="0dp"
             android:layout_weight="0.7"
             android:layout_marginTop="100dp"
@@ -70,7 +71,7 @@
         android:gravity="right">
 
         <Button
-            android:id="@+id/buttonprueba2"
+            android:id="@+id/buttonOpContSolicitud"
             android:layout_width="0dp"
             android:layout_weight="0.7"
             android:layout_height="50dp"
@@ -89,7 +90,7 @@
         android:weightSum="1">
 
         <Button
-            android:id="@+id/buttonprueba3"
+            android:id="@+id/buttonOpContLabo"
             android:layout_width="0dp"
             android:layout_weight="0.7"
             android:layout_height="50dp"
