@@ -1,53 +1,103 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondomain">
+    android:background="@drawable/fondomain"
+    >
 
     <RelativeLayout
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
         android:background="#FFFFFF"
         android:alpha="0.9"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="40dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Administrador"
+            android:text="Operaciones"
             android:id="@+id/textViewAdmi"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="15dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="17dp" />
+            android:layout_marginLeft="15dp"
+            android:background="#000000"
+            android:padding="4dp"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seleccione la tarea a realizar"
+            android:layout_below="@+id/textViewAdmi"
+            android:layout_alignLeft="@+id/textViewAdmi"
+            android:layout_alignStart="@+id/textViewAdmi"
+            android:layout_marginTop="10dp"
+            android:textSize="16dp"/>
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/buttonprueba"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:background="#ffffe0"
-        android:drawableLeft="@drawable/volcanoic"
-        android:text="hola mundo"
-        android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/button"
-        android:layout_alignEnd="@+id/button"
-        android:layout_alignParentLeft="true"/>
+    <LinearLayout
+        android:id="@+id/soporte"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
-    <Button
-        android:id="@+id/buttonprueba2"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:background="#ffffe0"
-        android:drawableLeft="@drawable/volcanoic"
-        android:text="hola mundo"
-        android:layout_marginTop="240dp"
-        android:layout_alignParentRight="true"
-        />
+        <Button
+            android:id="@+id/buttonprueba"
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
+            android:layout_marginTop="100dp"
+            android:layout_height="50dp"
+            android:background="#ffffe0"
+            android:drawableLeft="@drawable/volcanoic"
+            android:text="Nueva Incidencia"
+            android:layout_alignParentLeft="true"/>
+    </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/soporte2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_below="@+id/soporte"
+        android:paddingTop="10dp"
+        android:layout_gravity="right"
+        android:gravity="right">
+
+        <Button
+            android:id="@+id/buttonprueba2"
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
+            android:layout_height="50dp"
+            android:background="#ffffe0"
+            android:drawableRight="@drawable/volcanoic"
+            android:text="Control de Solicitudes"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/soporte3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/soporte2"
+        android:paddingTop="10dp"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/buttonprueba3"
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
+            android:layout_height="50dp"
+            android:background="#ffffe0"
+            android:drawableLeft="@drawable/volcanoic"
+            android:text="Control de Laboratorios"
+            android:layout_alignParentLeft="true"/>
+    </LinearLayout>
 
 
 </RelativeLayout>
