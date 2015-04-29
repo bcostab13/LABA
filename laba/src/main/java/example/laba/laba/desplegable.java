@@ -32,15 +32,15 @@ public class desplegable extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_desplegable);
 
-        //relacionamos ocn el XML
+        //relacionamos con el XML
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         //Configuramos el Boton que desplegará el menú
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,                 //la actividad
                 mDrawerLayout,         //el drawerLayout que desplegará
-                R.drawable.ic_launcher, //el icono que mostraremos
-                R.string.app_name,  //descripción al abrir
+                R.drawable.ic_drawer, //el icono que mostraremos
+                R.string.prueba,  //descripción al abrir
                 R.string.app_name  //descripción al cerrar
         ) {     };
 
