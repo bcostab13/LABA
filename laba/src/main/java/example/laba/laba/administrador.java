@@ -41,7 +41,7 @@ public class administrador extends Activity{
         izquierdo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent lanzar_desplegable=new Intent(administrador.this,desplegable.class);
+                Intent lanzar_desplegable=new Intent(administrador.this,regincidencia.class);
                 startActivity(lanzar_desplegable);
             }
         });

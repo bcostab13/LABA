@@ -33,11 +33,23 @@
         </activity>
 
         <activity
-            android:name="example.laba.laba.desplegable"
-            android:label="desplegable"
+            android:name="example.laba.laba.regincidencia"
+            android:noHistory="true"
+            android:label="Registro de Incidencia"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.DESPLEGABLE" />
+                <action android:name="android.intent.action.REGINCIDENCIA" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="example.laba.laba.contsolic"
+            android:label="Control de Solicitudes"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.CONTSOLIC" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
