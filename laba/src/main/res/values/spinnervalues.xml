@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="planets_array">
+        <item>Fallo grave</item>
+        <item>Problema de Software</item>
+        <item>Ausencia de Software</item>
+        <item>Fallo de Hardware</item>
+        <item>Ausencia de Hardware</item>
+    </string-array>
+
+
+</resources>

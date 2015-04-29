@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -26,12 +27,16 @@ public class desplegable extends Activity {
     //ActionBarDrawerToggle es donde aparecerá el boton
     //para desplegar el menú
     private ActionBarDrawerToggle mDrawerToggle;
+    private Spinner cmbCategoria;
+    String cat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_desplegable);
 
+
+        /////////////////CODIGO DE MENU DESPLEGABLE////////////////////////
         //relacionamos con el XML
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -68,6 +73,38 @@ public class desplegable extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         //Activamso el click en el icono de la aplicación
         getActionBar().setHomeButtonEnabled(true);
+
+        ////////////////////////////////////////////////////////////////////
+
+        //////////////////SETEO DE SPINNER/////////////////////////////////
+
+
+        final String categorias[]={"problema1","problema2","problema3","problema4","problema5"};
+        Spinner spinnerCat = (Spinner) findViewById(R.id.spinnerCategoria);
+        // Creamos el ArrayAdapter
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.planets_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinnerCat.setAdapter(adapter);
+
+        //Obtenemos el valor seleccionado
+        spinnerCat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                cat=categorias[i];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        ///////////////////////////////////////////////////////////////////
+
+
 
     }
 
