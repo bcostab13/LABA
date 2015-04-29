@@ -2,11 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="example.laba.laba" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/volcanoic"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+
         <activity
             android:name="example.laba.laba.main"
             android:label="@string/app_name"
@@ -24,6 +27,17 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.CPRUEBA" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="example.laba.laba.desplegable"
+            android:label="desplegable"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.DESPLEGABLE" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
