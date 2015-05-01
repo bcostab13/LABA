@@ -25,6 +25,10 @@ public class contsolic extends Activity{
     //para desplegar el menú
     private ActionBarDrawerToggle mDrawerToggle;
 
+    //atributos de la interfaz
+    ListView listView;
+    ArrayAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +76,15 @@ public class contsolic extends Activity{
 
         ////////////////////////////////////////////////////////////////////
 
+        ///////////////////////OBTENCION DE SOLICITUDES/////////////////////
+        //obtener instancia de la lista
+        listView=(ListView)findViewById(R.id.listViewSolicitudes);
 
+        //crear y setear adaptador
+        adapter=new auxpostadapter(this);
+        listView.setAdapter(adapter);
+
+        ///////////////////////////////////////////////////////////////////
 
     }
 
@@ -82,12 +94,14 @@ public class contsolic extends Activity{
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
     }
+
     //Igual con la configuración
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
     //Activamos el click paradesplegar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -96,4 +110,6 @@ public class contsolic extends Activity{
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
