@@ -14,9 +14,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class regincidencia extends Activity {
@@ -31,11 +42,29 @@ public class regincidencia extends Activity {
     private Spinner cmbCategoria;
     String cat;
 
+    //atributos de volley
+    //atributos
+    private String URL_BASE="http://helpdeskfisi20.esy.es";
+    private static final String TAG="PostAdapter";
+    private String URL_JSON="/registrarSolicitud.php";
+    //agregamos el Administrador de Colas de Peticiones de Volley
+    private RequestQueue requestQueue;
+    StringRequest jsArrayRequest;
+
+    //atributos de la interfaz
+    Button bEnviar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regincidencia);
 
+        //iniciar componentes
+        bEnviar=(Button)findViewById(R.id.buttonRegistrar);
+
+        //iniciar Volley
+        //creamos una nueva cola de peticiones
+        requestQueue= Volley.newRequestQueue(this);
 
         /////////////////CODIGO DE MENU DESPLEGABLE////////////////////////
         //relacionamos con el XML
@@ -110,6 +139,49 @@ public class regincidencia extends Activity {
 
         ///////////////////////////////////////////////////////////////////
 
+        ////////////////////////ENVIAR SOLICITUD///////////////////////////
+
+        bEnviar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Gestionar peticion
+                jsArrayRequest=new StringRequest(
+                        Request.Method.POST,
+                        URL_BASE+URL_JSON,
+                        new Response.Listener<String>(){
+
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(regincidencia.this,"Llego hasta aqui",Toast.LENGTH_LONG).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                            }
+                        }
+                ){
+                    @Override
+                    protected Map<String,String> getParams(){
+                        Map<String,String> params=new HashMap<String, String>();
+                        params.put("codsol","SOL000001");
+                        params.put("fecreg","09/06/2015 2PM");
+                        params.put("desc","La CPU hace un sonido extraño");
+                        params.put("im","/img/admi.png");
+                        params.put("codub","LAB001");
+                        params.put("codus","US0000001");
+                        return params;
+                    }
+                };
+                requestQueue.add(jsArrayRequest);
+            }
+        });
+
+
+
+        ///////////////////////////////////////////////////////////////////
 
 
     }
