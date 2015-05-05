@@ -56,73 +56,64 @@
                 android:layout_centerVertical="true">
 
                 <LinearLayout
-                    android:id="@+id/form"
+                    android:id="@+id/form3"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+
+                    android:layout_marginTop="0dp"
                     android:weightSum="1"
                     android:gravity="center"
                     >
 
                     <EditText
-                        android:id="@+id/campo1"
+                        android:id="@+id/editFecha"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
-                        android:hint="Nombre"
-                        android:textSize="14dp"/>
+                        android:hint="Fecha"
+                        android:textSize="14dp"
+                        android:editable="false"
+                        android:enabled="true" />
 
                 </LinearLayout>
+
+
 
                 <LinearLayout
                     android:id="@+id/form2"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/form"
+                    android:layout_below="@+id/form3"
                     android:layout_marginTop="0dp"
                     android:weightSum="1"
                     android:gravity="center"
                     >
 
-                    <EditText
-                        android:id="@+id/campo2"
+                    <TextView
+                        android:id="@+id/textViewLugar"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.9"
-                        android:hint="Área"
-                        android:textSize="14dp"/>
+                        android:layout_weight="0.25"
+                        android:text="Lugar:"
+                    />
+                    <Spinner
+                        android:id="@+id/spinnerLugar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"></Spinner>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/form3"
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/form2"
-                    android:layout_marginTop="0dp"
-                    android:weightSum="1"
-                    android:gravity="center"
-                    >
 
-                    <EditText
-                        android:id="@+id/campo3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.9"
-                        android:hint="Fecha"
-                        android:textSize="14dp"/>
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/form4"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/form3"
+                    android:layout_below="@+id/form2"
                     android:layout_marginTop="0dp"
                     android:weightSum="1"
                     android:gravity="center"

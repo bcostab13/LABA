@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,6 +55,9 @@ public class regincidencia extends Activity {
 
     //atributos de la interfaz
     Button bEnviar;
+    Spinner spinnerLug;
+    String lugar;
+    EditText textFecha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +65,64 @@ public class regincidencia extends Activity {
         setContentView(R.layout.activity_regincidencia);
 
         //iniciar componentes
-        bEnviar=(Button)findViewById(R.id.buttonRegistrar);
+        bEnviar = (Button) findViewById(R.id.buttonRegistrar);
+        spinnerLug = (Spinner) findViewById(R.id.spinnerLugar);
+        textFecha=(EditText)findViewById(R.id.editFecha);
 
         //iniciar Volley
         //creamos una nueva cola de peticiones
-        requestQueue= Volley.newRequestQueue(this);
+        requestQueue = Volley.newRequestQueue(this);
+
+        //////////////////SETEO DE FECHA DEL SISTEMA///////////////////////
+        //creamos una instancia de la fecha del sistema
+        Calendar calendar=Calendar.getInstance();
+        int anio=calendar.get(Calendar.YEAR);
+        int mes=calendar.get(Calendar.MONTH);
+        int dia=calendar.get(Calendar.DAY_OF_MONTH);
+        int hora=calendar.get(Calendar.HOUR_OF_DAY);
+        int minutos=calendar.get(Calendar.MINUTE);
+        int ampm=calendar.get(Calendar.AM_PM);
+        //seteamos el valor en el campo fecha
+        String horario=ampm==0?"AM":"PM";
+        hora=hora==0?12:hora;
+        String horaS=hora<10?"0"+hora:""+hora;
+        String mesS=hora<10?"0"+mes:""+mes;
+        String diaS=hora<10?"0"+dia:""+dia;
+        textFecha.setText(mesS+"/"+diaS+"/"+anio+" "+horaS+":"+minutos+" "+horario);
+        textFecha.setEnabled(false);
+        ///////////////////////////////////////////////////////////////////
+
+        /////////////////SETEO DE SPINNER LUGAR////////////////////////////
+        //declaramos un array con las opciones
+
+        //declaramos un adapter para usar un array generico de java
+        ArrayAdapter<CharSequence> adaptadorLug = ArrayAdapter.createFromResource(this,
+                R.array.lugares, android.R.layout.simple_spinner_item);
+
+        //enlazamos el spinner
+        adaptadorLug.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLug.setAdapter(adaptadorLug);
+
+        //activamos los eventos
+        //OnItemSelected=cuando se hace click
+        //onNothingSelected=lo que pasa cuando no seleccionas nada
+
+        final String[] losLugares=getResources().getStringArray(R.array.lugares);
+        spinnerLug.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener(){
+                    //cuando hago clic en uno
+                    public void onItemSelected(AdapterView<?> parent,
+                                               android.view.View v,int position, long id){
+                        lugar=losLugares[position];
+                    }
+                    public void onNothingSelected(AdapterView<?> parent){
+
+                    }
+                }
+        );
+
+        ///////////////////////////////////////////////////////////////////
+
 
         /////////////////CODIGO DE MENU DESPLEGABLE////////////////////////
         //relacionamos con el XML
@@ -113,12 +171,11 @@ public class regincidencia extends Activity {
 
         //////////////////SETEO DE SPINNER/////////////////////////////////
 
-
-        final String categorias[]={"problema1","problema2","problema3","problema4","problema5"};
+        final String[] categorias=getResources().getStringArray(R.array.fallos);
         Spinner spinnerCat = (Spinner) findViewById(R.id.spinnerCategoria);
         // Creamos el ArrayAdapter
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.planets_array, android.R.layout.simple_spinner_item);
+                R.array.fallos, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
