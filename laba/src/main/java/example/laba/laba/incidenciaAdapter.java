@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -26,20 +27,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Brenda on 01/05/2015.
+ * Created by Brenda on 05/05/2015.
  */
-public class auxpostadapter extends ArrayAdapter {
-
+public class incidenciaAdapter extends ArrayAdapter{
     //atributos
     private String URL_BASE="http://helpdeskfisi20.esy.es";
-    private static final String TAG="PostAdapter";
-    private String URL_JSON="/consultarSolicitud.php";
-    List<Post> items;
+    private static final String TAG="IncidenciaAdapter";
+    private String URL_JSON="/consultarIncidencia.php";
+    List<incidencia> items;
     //agregamos el Administrador de Colas de Peticiones de Volley
     private RequestQueue requestQueue;
     JsonObjectRequest jsArrayRequest;
 
-    public auxpostadapter(Context context){
+    public incidenciaAdapter(Context context){
         super(context,0);
 
         //creamos una nueva cola de peticiones
@@ -53,7 +53,7 @@ public class auxpostadapter extends ArrayAdapter {
                 new Response.Listener<JSONObject>(){
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d(TAG,"RESPUESTA="+response);
+                        Log.d(TAG, "RESPUESTA=" + response);
                         items=parseJson(response);
                         notifyDataSetChanged();
                     }
@@ -75,6 +75,7 @@ public class auxpostadapter extends ArrayAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        int estrellas=0;
         LayoutInflater layoutInflater=LayoutInflater.from(parent.getContext());
 
         //guardando la referencia del VIew de la fila
@@ -94,16 +95,33 @@ public class auxpostadapter extends ArrayAdapter {
         }
 
         //Obtener el item actual
-        Post item=items.get(position);
+        incidencia item=items.get(position);
 
         //Obtener views
         TextView textoTitulo=(TextView)listItemView.findViewById(R.id.textViewNomSol);
         TextView textoDescripcion=(TextView)listItemView.findViewById(R.id.textViewDescSol);
         final ImageView imagenPost=(ImageView)listItemView.findViewById(R.id.imagenPost);
+        RatingBar ratingDificultad=(RatingBar)listItemView.findViewById(R.id.ratingbarDificultad);
 
         //actualizar los views
-        textoTitulo.setText(item.getTitulo());
-        textoDescripcion.setText(item.getDescripcion());
+        textoTitulo.setText(item.getCategoria());
+        textoDescripcion.setText(item.getCod_ubicacion());
+        if(item.getCategoria().equals("Inestabilidad o Reseteo")){
+            estrellas=5;
+        }else if(item.getCategoria().equals("Incompatibilidad o Lentitud")){
+            estrellas=4;
+        }else if(item.getCategoria().equals("Ausencia de Software")){
+            estrellas=1;
+        }else if(item.getCategoria().equals("Falla de Hardware")){
+            estrellas=3;
+        }else if(item.getCategoria().equals("Ausencia de Hardware")){
+            estrellas=2;
+        }else if(item.getCategoria().equals("Falla de Red")){
+            estrellas=2;
+        }else{
+            estrellas=0;
+        }
+        ratingDificultad.setRating(estrellas);
 
         //Peticion para obtener la imagen
         ImageRequest request=new ImageRequest(
@@ -133,24 +151,28 @@ public class auxpostadapter extends ArrayAdapter {
     }
 
 
-    public List<Post> parseJson(JSONObject jsonObject){
+    public List<incidencia> parseJson(JSONObject jsonObject){
         //variables locales
-        List<Post> posts=new ArrayList<Post>();
+        List<incidencia> posts=new ArrayList<incidencia>();
         JSONArray jsonArray=null;
 
         try {
             //obtener el array del objeto
-            jsonArray=jsonObject.getJSONArray("posts");
+            jsonArray=jsonObject.getJSONArray("incidencia");
             for (int i=0;i<jsonArray.length();i++){
                 try{
                     JSONObject objeto=jsonArray.getJSONObject(i);
 
-                    Post post=new Post(
-                        objeto.getString("titulo"),
-                        objeto.getString("descripcion"),
-                        objeto.getString("imagen")
+                    incidencia incidenciaNueva=new incidencia(
+                            objeto.getString("cod_solicitud"),
+                            objeto.getString("fechaRegistro"),
+                            objeto.getString("descripcion"),
+                            objeto.getString("imagen"),
+                            objeto.getString("categoria"),
+                            objeto.getString("cod_usuario"),
+                            objeto.getString("cod_ubicacion")
                     );
-                    posts.add(post);
+                    posts.add(incidenciaNueva);
                 }catch (JSONException e){
                     Log.e(TAG,"Error de parsing: "+e.getMessage());
                 }

@@ -6,8 +6,8 @@
     android:padding="10dp">
     
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="150dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:id="@+id/imagenPost"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -18,23 +18,33 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:text="Categoria"
         android:id="@+id/textViewNomSol"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/imagenPost"
         android:textStyle="bold"
+        android:textSize="16dp"
         android:layout_marginLeft="10dp"/>
     
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
+        android:text="Lugar"
         android:id="@+id/textViewDescSol"
         android:layout_below="@+id/textViewNomSol"
         android:layout_alignLeft="@+id/textViewNomSol"/>
 
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingbarDificultad"
+        android:layout_below="@+id/textViewDescSol"
+        android:layout_alignLeft="@+id/textViewNomSol"
+        android:numStars="5"
+        android:isIndicator="true"
+        style="?android:attr/ratingBarStyleSmall"
+        android:rating="5"/>
 
 
 

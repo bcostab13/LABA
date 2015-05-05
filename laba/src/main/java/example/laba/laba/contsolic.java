@@ -81,7 +81,7 @@ public class contsolic extends Activity{
         listView=(ListView)findViewById(R.id.listViewSolicitudes);
 
         //crear y setear adaptador
-        adapter=new auxpostadapter(this);
+        adapter=new incidenciaAdapter(this);
         listView.setAdapter(adapter);
 
         ///////////////////////////////////////////////////////////////////

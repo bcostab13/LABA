@@ -10,6 +10,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.text.format.Time;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,7 +28,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,8 +74,22 @@ public class regincidencia extends Activity {
         requestQueue = Volley.newRequestQueue(this);
 
         //////////////////SETEO DE FECHA DEL SISTEMA///////////////////////
+        Time today = new Time(Time.getCurrentTimezone());
+        today.setToNow();
+        int anio=today.year;
+        int mes=today.month;
+        int dia=today.monthDay;
+        int hora=today.hour;
+        int minutos=today.minute;
+        mes=mes+1;
+        String mesS=hora<10?"0"+mes:""+mes;
+        String diaS=dia<10?"0"+dia:""+dia;
+        textFecha.setText(diaS+"/"+mesS+"/"+anio+" "+today.format("%k:%M:%S"));
+        //textFecha.setText(today.format("%k:%M:%S"));
+
+
         //creamos una instancia de la fecha del sistema
-        Calendar calendar=Calendar.getInstance();
+        /*Calendar calendar=Calendar.getInstance();
         int anio=calendar.get(Calendar.YEAR);
         int mes=calendar.get(Calendar.MONTH);
         int dia=calendar.get(Calendar.DAY_OF_MONTH);
@@ -89,7 +103,7 @@ public class regincidencia extends Activity {
         String mesS=hora<10?"0"+mes:""+mes;
         String diaS=hora<10?"0"+dia:""+dia;
         textFecha.setText(mesS+"/"+diaS+"/"+anio+" "+horaS+":"+minutos+" "+horario);
-        textFecha.setEnabled(false);
+        textFecha.setEnabled(false);*/
         ///////////////////////////////////////////////////////////////////
 
         /////////////////SETEO DE SPINNER LUGAR////////////////////////////
