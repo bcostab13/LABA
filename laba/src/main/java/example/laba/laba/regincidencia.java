@@ -85,25 +85,7 @@ public class regincidencia extends Activity {
         String mesS=hora<10?"0"+mes:""+mes;
         String diaS=dia<10?"0"+dia:""+dia;
         textFecha.setText(diaS+"/"+mesS+"/"+anio+" "+today.format("%k:%M:%S"));
-        //textFecha.setText(today.format("%k:%M:%S"));
 
-
-        //creamos una instancia de la fecha del sistema
-        /*Calendar calendar=Calendar.getInstance();
-        int anio=calendar.get(Calendar.YEAR);
-        int mes=calendar.get(Calendar.MONTH);
-        int dia=calendar.get(Calendar.DAY_OF_MONTH);
-        int hora=calendar.get(Calendar.HOUR_OF_DAY);
-        int minutos=calendar.get(Calendar.MINUTE);
-        int ampm=calendar.get(Calendar.AM_PM);
-        //seteamos el valor en el campo fecha
-        String horario=ampm==0?"AM":"PM";
-        hora=hora==0?12:hora;
-        String horaS=hora<10?"0"+hora:""+hora;
-        String mesS=hora<10?"0"+mes:""+mes;
-        String diaS=hora<10?"0"+dia:""+dia;
-        textFecha.setText(mesS+"/"+diaS+"/"+anio+" "+horaS+":"+minutos+" "+horario);
-        textFecha.setEnabled(false);*/
         ///////////////////////////////////////////////////////////////////
 
         /////////////////SETEO DE SPINNER LUGAR////////////////////////////

@@ -11,9 +11,14 @@ public class incidencia {
     private String categoria;
     private String cod_usuario;
     private String cod_ubicacion;
+    private String estado;
+
+    public incidencia(){
+
+    }
 
     public incidencia(String cod_solic,String fechaRegistro,String descripcion,String imagen,
-                      String categoria,String cod_usuario,String cod_ubicacion){
+                      String categoria,String cod_usuario,String cod_ubicacion,String estado){
         this.setCod_solic(cod_solic);
         this.setFechaRegistro(fechaRegistro);
         this.setDescripcion(descripcion);
@@ -21,6 +26,7 @@ public class incidencia {
         this.setCategoria(categoria);
         this.setCod_usuario(cod_usuario);
         this.setCod_ubicacion(cod_ubicacion);
+        this.setEstado(estado);
     }
 
 
@@ -78,5 +84,13 @@ public class incidencia {
 
     public void setCod_ubicacion(String cod_ubicacion) {
         this.cod_ubicacion = cod_ubicacion;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

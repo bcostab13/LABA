@@ -104,8 +104,8 @@ public class incidenciaAdapter extends ArrayAdapter{
         RatingBar ratingDificultad=(RatingBar)listItemView.findViewById(R.id.ratingbarDificultad);
 
         //actualizar los views
-        textoTitulo.setText(item.getCategoria());
-        textoDescripcion.setText(item.getCod_ubicacion());
+        textoTitulo.setText(item.getCod_solic());
+        textoDescripcion.setText(item.getCategoria());
         if(item.getCategoria().equals("Inestabilidad o Reseteo")){
             estrellas=5;
         }else if(item.getCategoria().equals("Incompatibilidad o Lentitud")){
@@ -146,6 +146,7 @@ public class incidenciaAdapter extends ArrayAdapter{
         requestQueue.add(request);
 
 
+
         return listItemView;
 
     }
@@ -170,7 +171,8 @@ public class incidenciaAdapter extends ArrayAdapter{
                             objeto.getString("imagen"),
                             objeto.getString("categoria"),
                             objeto.getString("cod_usuario"),
-                            objeto.getString("cod_ubicacion")
+                            objeto.getString("cod_ubicacion"),
+                            objeto.getString("estado")
                     );
                     posts.add(incidenciaNueva);
                 }catch (JSONException e){
@@ -182,4 +184,8 @@ public class incidenciaAdapter extends ArrayAdapter{
         }
         return posts;
     }
+
+
+
+
 }

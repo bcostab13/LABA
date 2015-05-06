@@ -1,15 +1,18 @@
 package example.laba.laba;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -28,6 +31,9 @@ public class contsolic extends Activity{
     //atributos de la interfaz
     ListView listView;
     ArrayAdapter adapter;
+
+    //atributos de Bundle
+    incidencia auxiliar;
 
 
     @Override
@@ -82,7 +88,22 @@ public class contsolic extends Activity{
 
         //crear y setear adaptador
         adapter=new incidenciaAdapter(this);
+
         listView.setAdapter(adapter);
+
+        //acciones del clic de solicitud
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d("ClickList","LLega hasta aca");
+                TextView aux=(TextView)view.findViewById(R.id.textViewNomSol);
+                //Toast.makeText(getApplicationContext(),"Nombre="+aux.getText(),Toast.LENGTH_LONG).show();
+                //enviamos el codigo de solicitud a la siguiente actividad
+                Bundle codS=new Bundle();
+                codS.putString("codigo",aux.getText().toString());
+                startActivity(new Intent(contsolic.this,descincidencia.class).putExtras(codS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+        });
 
         ///////////////////////////////////////////////////////////////////
 
