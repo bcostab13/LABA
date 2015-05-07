@@ -42,7 +42,7 @@ public class regincidencia extends Activity {
     //para desplegar el menú
     private ActionBarDrawerToggle mDrawerToggle;
     private Spinner cmbCategoria;
-    String cat;
+
 
     //atributos de volley
     //atributos
@@ -55,9 +55,9 @@ public class regincidencia extends Activity {
 
     //atributos de la interfaz
     Button bEnviar;
-    Spinner spinnerLug;
-    String lugar;
-    EditText textFecha;
+    Spinner spinnerLug,spinnerCat;
+    String lugar,cat;
+    EditText textFecha,textDesc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +68,8 @@ public class regincidencia extends Activity {
         bEnviar = (Button) findViewById(R.id.buttonRegistrar);
         spinnerLug = (Spinner) findViewById(R.id.spinnerLugar);
         textFecha=(EditText)findViewById(R.id.editFecha);
+        spinnerCat = (Spinner) findViewById(R.id.spinnerCategoria);
+        textDesc=(EditText)findViewById(R.id.desc);
 
         //iniciar Volley
         //creamos una nueva cola de peticiones
@@ -168,7 +170,7 @@ public class regincidencia extends Activity {
         //////////////////SETEO DE SPINNER/////////////////////////////////
 
         final String[] categorias=getResources().getStringArray(R.array.fallos);
-        Spinner spinnerCat = (Spinner) findViewById(R.id.spinnerCategoria);
+
         // Creamos el ArrayAdapter
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.fallos, android.R.layout.simple_spinner_item);

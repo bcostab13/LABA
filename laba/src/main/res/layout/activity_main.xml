@@ -60,7 +60,7 @@
             android:id="@+id/button"
             android:height="10dp"
             android:textSize="12dp"
-            android:background="#bfbc5e"
+            android:background="@drawable/botonpulsado"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dp"/>

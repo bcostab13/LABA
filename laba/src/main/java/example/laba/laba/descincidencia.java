@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -27,7 +28,7 @@ public class descincidencia extends Activity {
     //atributos
     private String URL_BASE="http://helpdeskfisi20.esy.es";
     private static final String TAG="DatosIncidencia";
-    private String URL_JSON="/datosIncidencia.php";
+    private String URL_JSON="/datosIncidencia.php?ci=";
     //agregamos el Administrador de Colas de Peticiones de Volley
     private RequestQueue requestQueue2;
     JsonObjectRequest jsArrayRequest2;
@@ -35,6 +36,7 @@ public class descincidencia extends Activity {
 
     //ATRIBUTOS DE NUESTROS COMPONENTES
     TextView est,cod,fec,cat,lug,us,desc;
+    Button actEst;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,24 +60,37 @@ public class descincidencia extends Activity {
         lug=(TextView)findViewById(R.id.textViewValLugar);
         us=(TextView)findViewById(R.id.textViewValUsuario);
         desc=(TextView)findViewById(R.id.textViewValDescrip);
+        actEst=(Button)findViewById(R.id.buttonModEst);
 
         //desempacamos el bundle
         final String codigo=getIntent().getStringExtra("codigo");
+        Log.d(TAG,"codigo bundle="+codigo);
 
         //usamos volley para obtener todos los datos de la incidencia
         requestQueue2= Volley.newRequestQueue(this);
 
         //Gestionar peticion
         jsArrayRequest2=new JsonObjectRequest(
-                Request.Method.POST,
-                URL_BASE+URL_JSON,
+                Request.Method.GET,
+                URL_BASE+URL_JSON+codigo,
                 null,
                 new Response.Listener<JSONObject>(){
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, "RESPUESTA=" + response);
                         incaux=parseJson(response);
-                        est.setText(incaux.getEstado());
+                        int estado=Integer.parseInt(incaux.getEstado());
+                        String estaux="";
+                        switch (estado){
+                            case 0: estaux="Nuevo";
+                                    actEst.setEnabled(true);
+                                break;
+                            case 1: estaux="Atendiendo";
+                                    actEst.setEnabled(true);
+                                break;
+                            case 2: estaux="Terminado";
+                        }
+                        est.setText(estaux);
                         cod.setText(incaux.getCod_solic());
                         fec.setText(incaux.getFechaRegistro());
                         cat.setText(incaux.getCategoria());
@@ -116,7 +131,7 @@ public class descincidencia extends Activity {
                     incidenciaNueva.setCategoria(objeto.getString("categoria"));
                     incidenciaNueva.setCod_solic(objeto.getString("cod_solicitud"));
                     incidenciaNueva.setCod_ubicacion(objeto.getString("ubicacion"));
-                    incidenciaNueva.setCod_usuario(objeto.getString("nombre")+objeto.getString("apellido"));
+                    incidenciaNueva.setCod_usuario(objeto.getString("nombre") + " " + objeto.getString("apellido"));
                     incidenciaNueva.setDescripcion(objeto.getString("descripcion"));
                     incidenciaNueva.setFechaRegistro(objeto.getString("fechaRegistro"));
                     Log.d(TAG,"Sale "+incidenciaNueva.getCod_solic());

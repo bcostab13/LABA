@@ -54,7 +54,7 @@
             android:layout_weight="0.7"
             android:layout_marginTop="100dp"
             android:layout_height="50dp"
-            android:background="#ffffe0"
+            android:background="@drawable/panelbutton"
             android:drawableLeft="@drawable/volcanoic"
             android:text="Nueva Incidencia"
             android:layout_alignParentLeft="true"/>
@@ -75,7 +75,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.7"
             android:layout_height="50dp"
-            android:background="#ffffe0"
+            android:background="@drawable/panelbutton"
             android:drawableRight="@drawable/volcanoic"
             android:text="Control de Solicitudes"
             />
@@ -94,7 +94,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.7"
             android:layout_height="50dp"
-            android:background="#ffffe0"
+            android:background="@drawable/panelbutton"
             android:drawableLeft="@drawable/volcanoic"
             android:text="Control de Laboratorios"
             android:layout_alignParentLeft="true"/>
