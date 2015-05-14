@@ -1,0 +1,150 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contenedorDescInc"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fondomain">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="#FFFFFF"
+            android:alpha="0.9"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Actualización de Estado"
+                android:id="@+id/textViewDescIncidencia"
+                android:layout_marginTop="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp"
+                android:background="#000000"
+                android:padding="4dp"
+                android:textColor="#FFFFFF"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecciona el nuevo estado:"
+                android:textAllCaps="false"
+                android:layout_centerInParent="false"
+                android:id="@+id/textViewEstado"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/textViewDescIncidencia"
+                android:padding="1dp"
+                android:textColor="#000000"
+                android:textSize="15dp"/>
+
+            <RelativeLayout
+                android:id="@+id/contenedor"
+                android:gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_below="@+id/textViewEstado"
+                android:layout_centerVertical="true">
+
+                 <LinearLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical"
+                     android:layout_marginTop="10dp"
+                     android:id="@+id/formopciones"
+                     android:gravity="center_horizontal">
+
+
+
+                     <RadioGroup
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         >
+                    <RadioButton
+                       android:layout_width="160dp"
+                       android:layout_height="wrap_content"
+                       android:id="@+id/rbatendiendo"
+                       android:text="Atendiendo"
+
+
+                       />
+
+                     <RadioButton
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rbatendido"
+                        android:text="Atendido"
+
+                        android:layout_below="@+id/rbatendiendo"
+
+                        />
+
+                    <RadioButton
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rbfinalizado"
+                        android:text="Finalizado"
+                        android:layout_below="@+id/rbatendido"
+
+                        />
+
+                    <RadioButton
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rbcancelado"
+                        android:text="Cancelado"
+                        android:layout_below="@+id/rbfinalizado"
+
+                        />
+
+                     </RadioGroup>
+                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/form6"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="7dp"
+                    android:layout_below="@+id/formopciones"
+                    android:weightSum="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="0.93"
+                        android:src="@drawable/helpdesk"
+                        android:scaleType="centerInside"/>
+
+                    <Button
+                        android:layout_width="80dp"
+                        android:layout_height="25dp"
+                        android:text="Actualizar"
+                        android:enabled="true"
+                        android:id="@+id/buttonModEst"
+                        android:textSize="12dp"
+                        android:background="@drawable/botonpulsado"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

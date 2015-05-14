@@ -49,16 +49,15 @@ public class administrador extends Activity{
         derecho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent lanzar_controlSol=new Intent(administrador.this,contsolic.class);
-                startActivity(lanzar_controlSol);
+                Intent lanzar_control=new Intent(administrador.this,control.class);
+                startActivity(lanzar_control);
             }
         });
 
         izquierdo2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent lanzar_descInc=new Intent(administrador.this,descincidencia.class);
-                startActivity(lanzar_descInc);
+
             }
         });
     }

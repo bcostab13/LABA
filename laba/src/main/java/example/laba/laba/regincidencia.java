@@ -153,7 +153,7 @@ public class regincidencia extends Activity {
                 //Se cierra el menú
                 mDrawerLayout.closeDrawers();
                 if(opciones[arg2].equals("Control de Solicitudes")){
-                    Intent lanzar_control=new Intent(regincidencia.this,contsolic.class);
+                    Intent lanzar_control=new Intent(regincidencia.this,control.class);
                     finish();
                     startActivity(lanzar_control);
                 }

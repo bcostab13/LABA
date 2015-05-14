@@ -9,81 +9,126 @@
     android:background="@drawable/fondomain"
     tools:context="example.laba.laba.main">
 
-    <TextView
-        style="@style/TextoNivel1"
-        android:text="Bienvenido a Laba"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView_bienvenida"
-        android:layout_below="@+id/imageView_inicial"
-        android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:layout_width="170dp"
-        android:layout_height="200dp"
-        android:id="@+id/imageView_inicial"
-        android:src="@drawable/mainim"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
     <RelativeLayout
-        android:orientation="vertical"
-        android:layout_width="200dp"
-        android:layout_height="fill_parent"
-        android:layout_marginBottom="20dp"
-        android:layout_below="@+id/textView_bienvenida"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp"
-        android:background="#E6E6E6">
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Usuario:"
-            android:id="@+id/textView"
-            android:layout_alignBottom="@+id/editText_user"
-            android:layout_toLeftOf="@+id/button" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contraseña:"
-            android:id="@+id/textView2"
-            android:layout_centerVertical="true"
-            android:layout_alignLeft="@+id/textView"
-            android:layout_alignStart="@+id/textView" />
-
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:text="Ingresar"
-            android:id="@+id/button"
-            android:height="10dp"
-            android:textSize="12dp"
-            android:background="@drawable/botonpulsado"
-            android:layout_alignParentBottom="true"
+        <ImageView
+            android:layout_width="170dp"
+            android:layout_height="200dp"
+            android:id="@+id/imageView_inicial"
+            android:src="@drawable/mainim"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"/>
+            android:layout_centerVertical="true"/>
 
-        <EditText
-            android:layout_width="100dp"
+        <TextView
+            style="@style/TextoNivel1"
+            android:text="Bienvenido a Laba"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editText_user"
-            android:textSize="14dp"
-            android:paddingRight="30dp"
-            android:layout_above="@+id/editText_pass"
-            android:layout_toRightOf="@+id/textView2" />
+            android:id="@+id/textView_bienvenida"
+            android:layout_below="@+id/imageView_inicial"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"/>
 
-        <EditText
-            android:layout_width="100dp"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText_pass"
-            android:layout_alignBottom="@+id/textView2"
-            android:layout_alignLeft="@+id/editText_user"
-            android:layout_alignStart="@+id/editText_user"
-            android:textSize="14dp"
-            android:paddingRight="30dp"
-            android:password="true" />
+            android:gravity="center_horizontal"
+            android:weightSum="1"
+            android:layout_below="@+id/textView_bienvenida"
+            android:layout_centerInParent="true">
+
+        <RelativeLayout
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="0.9"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp"
+            android:background="#E6E6E6"
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/formUsuario"
+                android:gravity="center_horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Usuario:"
+                    android:id="@+id/textView"
+                    android:layout_alignBottom="@+id/editText_user"
+                    android:layout_toLeftOf="@+id/button" />
+
+                <EditText
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_user"
+                    android:textSize="14dp"
+                    android:paddingRight="30dp"
+                    android:layout_above="@+id/editText_pass"
+                    android:layout_toRightOf="@+id/textView2"
+                    android:layout_marginLeft="22dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/formUsuario"
+                android:id="@+id/formContraseña"
+                android:gravity="center_horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contraseña:"
+                    android:id="@+id/textView2"
+                    android:layout_centerVertical="true"
+                    android:layout_alignLeft="@+id/textView"
+                    android:layout_alignStart="@+id/textView" />
+
+                <EditText
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_pass"
+                    android:layout_alignBottom="@+id/textView2"
+                    android:layout_alignLeft="@+id/editText_user"
+                    android:layout_alignStart="@+id/editText_user"
+                    android:textSize="14dp"
+                    android:paddingRight="30dp"
+                    android:password="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/formContraseña"
+                android:gravity="center_horizontal"
+                android:paddingTop="8dp">
+                <Button
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:text="Ingresar"
+                    android:id="@+id/button"
+                    android:height="10dp"
+                    android:textSize="12dp"
+                    android:background="@drawable/botonpulsado"
+
+                />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        </LinearLayout>
+
     </RelativeLayout>
 
 </RelativeLayout>

@@ -88,6 +88,27 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="example.laba.laba.actestado"
+            android:label="NUEVO ESTADO"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTESTADO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="example.laba.laba.control"
+            android:label="CONTROL DE SOLICITUDES"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.CONTROL" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
     </application>
 
