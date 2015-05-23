@@ -1,6 +1,8 @@
 package example.laba.laba;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.Toast;
 
 /**
  * Created by Brenda on 20/04/2015.
@@ -60,12 +63,26 @@ public class administrador extends Activity{
                 startActivity(lanzar_control);
             }
         });
-
+        //control de labos
         izquierdo2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                final CharSequence[] items = {"Android OS", "iOS", "Windows Phone", "Meego"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(administrador.this);
+                builder.setTitle("Tu OS móvil preferido?");
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+                        Toast toast = Toast.makeText(getApplicationContext(), "Haz elegido la opcion: " +
+                                items[item] , Toast.LENGTH_SHORT);
+                        toast.show();
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
+
+
     }
 }

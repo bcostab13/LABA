@@ -1,7 +1,9 @@
 package example.laba.laba;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -36,5 +38,12 @@ public class alumno extends Activity{
         mov_izquierda.reset();
         izquierdo2.startAnimation(mov_izquierda);
 
+        izquierdo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent lanzar_tabla=new Intent(alumno.this,tabla.class);
+                startActivity(lanzar_tabla);
+            }
+        });
     }
 }

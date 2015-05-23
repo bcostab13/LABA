@@ -79,6 +79,7 @@ public class regincidencia extends Activity {
         cod_op=getIntent().getIntExtra("codigo",0);
         List<UsuarioGeneral> listaUser=UsuarioGeneral.listAll(UsuarioGeneral.class);
         user=listaUser.get(0);
+        traductor=new ResolverNombres();
 
         //iniciar Volley
         //creamos una nueva cola de peticiones
@@ -208,7 +209,8 @@ public class regincidencia extends Activity {
         bEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ResolverNombres rn=new ResolverNombres();
+                lugar=rn.getTrad(lugar);
                 descripcion=textDesc.getText().toString();
                 final String usuarioE=user.getCodigo();
                 coddeuser=String.valueOf(cod_op);
@@ -225,7 +227,7 @@ public class regincidencia extends Activity {
 
                             @Override
                             public void onResponse(String response) {
-                                Toast.makeText(regincidencia.this,"Llego hasta aqui",Toast.LENGTH_LONG).show();
+                                //Toast.makeText(regincidencia.this,"Llego hasta aqui",Toast.LENGTH_LONG).show();
                                 Marca cont = Marca.findById(Marca.class, (long) 1);
                                 cont.setCode(cont.getCode()+1);
                                 cont.save(); // updates the previous entry with new values.
@@ -262,6 +264,7 @@ public class regincidencia extends Activity {
                             @Override
                             public void onResponse(String response) {
                                 Toast.makeText(regincidencia.this,"Solicitud Registrada",Toast.LENGTH_LONG).show();
+                                textDesc.setText("");
                             }
                         },
                         new Response.ErrorListener() {

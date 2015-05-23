@@ -111,6 +111,17 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="example.laba.laba.tabla"
+            android:label="TABLA"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.TABLA" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
 
         <meta-data android:name="DATABASE" android:value="sugar_example.db" />
         <meta-data android:name="VERSION" android:value="2" />
