@@ -29,10 +29,12 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
 public class regincidencia extends Activity {
+    ResolverNombres traductor;
     //El drawerLayout esn el que se desplega y
     //contiene dentro el menú, normalmente un listview
     private DrawerLayout mDrawerLayout;
@@ -49,15 +51,19 @@ public class regincidencia extends Activity {
     private String URL_BASE="http://helpdeskfisi20.esy.es";
     private static final String TAG="PostAdapter";
     private String URL_JSON="/registrarSolicitud.php";
+    private String URL_JSON_INC="/registrarIncidencia.php";
     //agregamos el Administrador de Colas de Peticiones de Volley
     private RequestQueue requestQueue;
-    StringRequest jsArrayRequest;
+    StringRequest jsArrayRequest,jsArrayRequest2;
 
     //atributos de la interfaz
     Button bEnviar;
     Spinner spinnerLug,spinnerCat;
     String lugar,cat;
     EditText textFecha,textDesc;
+    int cod_op=0;
+    UsuarioGeneral user;
+    String fecha,descripcion,coddeuser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +76,9 @@ public class regincidencia extends Activity {
         textFecha=(EditText)findViewById(R.id.editFecha);
         spinnerCat = (Spinner) findViewById(R.id.spinnerCategoria);
         textDesc=(EditText)findViewById(R.id.desc);
+        cod_op=getIntent().getIntExtra("codigo",0);
+        List<UsuarioGeneral> listaUser=UsuarioGeneral.listAll(UsuarioGeneral.class);
+        user=listaUser.get(0);
 
         //iniciar Volley
         //creamos una nueva cola de peticiones
@@ -87,7 +96,7 @@ public class regincidencia extends Activity {
         String mesS=hora<10?"0"+mes:""+mes;
         String diaS=dia<10?"0"+dia:""+dia;
         textFecha.setText(diaS+"/"+mesS+"/"+anio+" "+today.format("%k:%M:%S"));
-
+        fecha=textFecha.getText().toString();
         ///////////////////////////////////////////////////////////////////
 
         /////////////////SETEO DE SPINNER LUGAR////////////////////////////
@@ -199,7 +208,16 @@ public class regincidencia extends Activity {
         bEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Gestionar peticion
+
+                descripcion=textDesc.getText().toString();
+                final String usuarioE=user.getCodigo();
+                coddeuser=String.valueOf(cod_op);
+                final String categ=cat;
+                for (int i=0;i<4-String.valueOf(cod_op).length();i++){
+                    coddeuser="0"+coddeuser;
+                }
+                final String codInc="I"+usuarioE.substring(5)+coddeuser;
+                //ingresamos la solicitud
                 jsArrayRequest=new StringRequest(
                         Request.Method.POST,
                         URL_BASE+URL_JSON,
@@ -208,6 +226,9 @@ public class regincidencia extends Activity {
                             @Override
                             public void onResponse(String response) {
                                 Toast.makeText(regincidencia.this,"Llego hasta aqui",Toast.LENGTH_LONG).show();
+                                Marca cont = Marca.findById(Marca.class, (long) 1);
+                                cont.setCode(cont.getCode()+1);
+                                cont.save(); // updates the previous entry with new values.
                             }
                         },
                         new Response.ErrorListener() {
@@ -221,16 +242,45 @@ public class regincidencia extends Activity {
                     @Override
                     protected Map<String,String> getParams(){
                         Map<String,String> params=new HashMap<String, String>();
-                        params.put("codsol","SOL000001");
-                        params.put("fecreg","09/06/2015 2PM");
-                        params.put("desc","La CPU hace un sonido extraño");
-                        params.put("im","/img/admi.png");
-                        params.put("codub","LAB001");
-                        params.put("codus","US0000001");
+                        params.put("codsol",codInc);
+                        params.put("fecreg",fecha);
+                        params.put("desc",descripcion);
+                        params.put("im","/img/aus_software.jpg");
+                        params.put("codub",lugar);
+                        params.put("codus",usuarioE);
                         return params;
                     }
                 };
                 requestQueue.add(jsArrayRequest);
+
+                //ingresamos datos de incidencia
+                jsArrayRequest2=new StringRequest(
+                        Request.Method.POST,
+                        URL_BASE+URL_JSON_INC,
+                        new Response.Listener<String>(){
+
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(regincidencia.this,"Solicitud Registrada",Toast.LENGTH_LONG).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                            }
+                        }
+                ){
+                    @Override
+                    protected Map<String,String> getParams(){
+                        Map<String,String> params=new HashMap<String, String>();
+                        params.put("codsol",codInc);
+                        params.put("categoria",cat);
+                        return params;
+                    }
+                };
+                requestQueue.add(jsArrayRequest2);
             }
         });
 

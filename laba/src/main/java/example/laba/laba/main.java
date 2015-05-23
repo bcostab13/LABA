@@ -23,6 +23,8 @@ public class main extends ActionBarActivity {
     TextView textoBienvenida;
     Button botonIniciar;
     EditText edituser,editpassword;
+    int codigo=0;
+    UsuarioGeneral user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,20 +49,41 @@ public class main extends ActionBarActivity {
         botonIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle cod=new Bundle();
+                cod.putInt("codigo",codigo);
+
                 if(edituser.getText().toString().equals("alumno")){
-                    Intent iniciarAlumno=new Intent(main.this,alumno.class);
+                    Intent iniciarAlumno=new Intent(main.this,alumno.class).putExtras(cod).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(iniciarAlumno);
                 }else if(edituser.getText().toString().equals("admi")){
-                    Intent iniciarAdmi=new Intent(main.this,administrador.class);
+                    Intent iniciarAdmi=new Intent(main.this,administrador.class).putExtras(cod).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(iniciarAdmi);
                 }
             }
         });
 
-        Tag tag = new Tag("hola");
-        tag.save();
-        List<Tag> lista=Tag.listAll(Tag.class);
-        Log.d("Sugar","elemento="+lista.get(0));
+
+        try {
+            List<Marca> lista = Marca.listAll(Marca.class);
+            //Tag.deleteAll(Tag.class);
+            codigo = lista.get(0).getCode();
+        }catch (Exception e){
+            Marca marca=new Marca(0);
+            marca.save();
+            List<Marca> lista = Marca.listAll(Marca.class);
+            codigo = lista.get(0).getCode();
+        }
+        Log.d("Codigo", "elemento=" + codigo);
+
+        try{
+            List<UsuarioGeneral> listaUser=UsuarioGeneral.listAll(UsuarioGeneral.class);
+            user=listaUser.get(0);
+        }catch (Exception e){
+            //iniciar conexion
+            UsuarioGeneral prueba=new UsuarioGeneral("US0000001","Brenda Costa","administrador");
+            prueba.save();
+        }
+
 
 
     }
