@@ -41,8 +41,8 @@ public class alumno extends Activity{
         izquierdo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent lanzar_tabla=new Intent(alumno.this,tabla.class);
-                startActivity(lanzar_tabla);
+                Intent lanzar_registro=new Intent(alumno.this,regincidenciaA.class);
+                startActivity(lanzar_registro);
             }
         });
     }

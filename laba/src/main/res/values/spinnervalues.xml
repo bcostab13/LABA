@@ -36,5 +36,30 @@
         <item>Exteriores</item>
     </string-array>
 
+    <string-array name="lugaresAlumno">
+        <item>Lab 1</item>
+        <item>Lab 2</item>
+        <item>Lab 3</item>
+        <item>Lab 4</item>
+        <item>Lab 5</item>
+        <item>Lab 6</item>
+        <item>Lab 7</item>
+        <item>Lab 8</item>
+        <item>Aula 101</item>
+        <item>Aula 102</item>
+        <item>Aula 103</item>
+        <item>Aula 104</item>
+        <item>Aula 105</item>
+        <item>Aula 106</item>
+        <item>Aula 201</item>
+        <item>Aula 202</item>
+        <item>Aula 203</item>
+        <item>Aula 204</item>
+        <item>Aula 205</item>
+        <item>Aula 206</item>
+        <item>Aula FAM1</item>
+        <item>Aula FAM2</item>
+    </string-array>
+
 
 </resources>

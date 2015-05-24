@@ -3,6 +3,7 @@
     package="example.laba.laba" >
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -36,10 +37,22 @@
         <activity
             android:name="example.laba.laba.regincidencia"
             android:noHistory="true"
-            android:label="Registro de Incidencia"
+            android:label="REGISTRO DE INCIDENCIA"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.REGINCIDENCIA" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="example.laba.laba.regincidenciaA"
+            android:noHistory="true"
+            android:label="REGISTRO DE INCIDENCIA"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.REGINCIDENCIAA" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
