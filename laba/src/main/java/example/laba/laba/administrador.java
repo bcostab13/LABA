@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.Toast;
 
 /**
  * Created by Brenda on 20/04/2015.
@@ -72,9 +71,8 @@ public class administrador extends Activity{
                 builder.setTitle("Tu OS móvil preferido?");
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "Haz elegido la opcion: " +
-                                items[item] , Toast.LENGTH_SHORT);
-                        toast.show();
+                        Intent lanzar_contlab=new Intent(administrador.this,contlab.class);
+                        startActivity(lanzar_contlab);
                         dialog.cancel();
                     }
                 });

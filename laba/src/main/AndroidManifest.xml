@@ -114,9 +114,20 @@
         <activity
             android:name="example.laba.laba.tabla"
             android:label="TABLA"
-            android:screenOrientation="portrait">
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.TABLA" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="example.laba.laba.contlab"
+            android:label="CONTROL DE LABORATORIOS"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.CONTLAB" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
