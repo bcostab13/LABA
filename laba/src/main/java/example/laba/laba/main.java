@@ -53,6 +53,7 @@ public class main extends ActionBarActivity {
                 cod.putInt("codigo",codigo);
 
                 if(edituser.getText().toString().equals("alumno")){
+                    Log.d("bundle1",""+codigo);
                     Intent iniciarAlumno=new Intent(main.this,alumno.class).putExtras(cod).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(iniciarAlumno);
                 }else if(edituser.getText().toString().equals("admi")){

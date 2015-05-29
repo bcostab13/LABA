@@ -54,116 +54,123 @@
             android:layout_height="fill_parent"
             android:layout_below="@+id/textViewNLab"
             android:padding="5dp">
-            <ScrollView
+
+            <HorizontalScrollView
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_below="@+id/textViewValNLab">
+                android:layout_height="fill_parent">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <ScrollView
+                    android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_gravity="center_horizontal">
+                    android:layout_below="@+id/textViewValNLab"
+                    >
 
-                        <TableLayout
-                            android:id="@+id/tabla_horarios"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            >
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center_horizontal">
 
-                            <TableRow>
-                                <TextView android:id="@+id/hora" android:background="@drawable/cell_shape" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="Hora" android:padding="3dp"/>
-                                <TextView android:id="@+id/curso" android:background="@drawable/cell_shape" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="Curso o Uso" android:padding="3dp"/>
-                                <TextView android:id="@+id/profesor" android:background="@drawable/cell_shape" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="Profesor o  Encargado" android:padding="3dp"/>
-                            </TableRow>
+                            <TableLayout
+                                android:id="@+id/tabla_horarios"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                >
 
-                            <TableRow>
-                                <TextView android:id="@+id/hora0809a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="8:00 - 9:00" android:padding="3dp"/>
-                                <TextView android:id="@+id/curso0809a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                                <TextView android:id="@+id/profesor0809a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                            </TableRow>
+                                <TableRow>
+                                    <TextView android:id="@+id/hora" android:background="@drawable/cell_shape" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="Hora" android:padding="3dp"/>
+                                    <TextView android:id="@+id/curso" android:background="@drawable/cell_shape" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="Curso o Uso" android:padding="3dp"/>
+                                    <TextView android:id="@+id/profesor" android:background="@drawable/cell_shape" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="Profesor o  Encargado" android:padding="3dp"/>
+                                </TableRow>
 
-                            <TableRow>
-                                <TextView android:id="@+id/hora0910a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="9:00 - 10:00" android:padding="3dp"/>
-                                <TextView android:id="@+id/curso0910a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                                <TextView android:id="@+id/profesor0910a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                            </TableRow>
+                                <TableRow>
+                                    <TextView android:id="@+id/hora0809a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="8:00 - 9:00" android:padding="3dp"/>
+                                    <TextView android:id="@+id/curso0809a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                    <TextView android:id="@+id/profesor0809a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                </TableRow>
 
-                            <TableRow>
-                                <TextView android:id="@+id/hora1011a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="10:00 - 11:00" android:padding="3dp"/>
-                                <TextView android:id="@+id/curso1011a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                                <TextView android:id="@+id/profesor1011a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                            </TableRow>
+                                <TableRow>
+                                    <TextView android:id="@+id/hora0910a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="9:00 - 10:00" android:padding="3dp"/>
+                                    <TextView android:id="@+id/curso0910a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                    <TextView android:id="@+id/profesor0910a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                </TableRow>
 
-                            <TableRow>
-                                <TextView android:id="@+id/hora1112a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="11:00 - 12:00" android:padding="3dp"/>
-                                <TextView android:id="@+id/curso1112a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                                <TextView android:id="@+id/profesor1112a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                            </TableRow>
+                                <TableRow>
+                                    <TextView android:id="@+id/hora1011a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="10:00 - 11:00" android:padding="3dp"/>
+                                    <TextView android:id="@+id/curso1011a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                    <TextView android:id="@+id/profesor1011a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                </TableRow>
 
-                            <TableRow>
-                                <TextView android:id="@+id/hora1213a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="12:00 - 13:00" android:padding="3dp"/>
-                                <TextView android:id="@+id/curso1213a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                                <TextView android:id="@+id/profesor1213a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                            </TableRow>
+                                <TableRow>
+                                    <TextView android:id="@+id/hora1112a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="11:00 - 12:00" android:padding="3dp"/>
+                                    <TextView android:id="@+id/curso1112a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                    <TextView android:id="@+id/profesor1112a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                </TableRow>
 
-                            <TableRow>
-                                <TextView android:id="@+id/hora1314a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="13:00 - 14:00" android:padding="3dp"/>
-                                <TextView android:id="@+id/curso1314a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                                <TextView android:id="@+id/profesor1314a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                            </TableRow>
+                                <TableRow>
+                                    <TextView android:id="@+id/hora1213a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="12:00 - 13:00" android:padding="3dp"/>
+                                    <TextView android:id="@+id/curso1213a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                    <TextView android:id="@+id/profesor1213a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                </TableRow>
 
-                            <TableRow>
-                                <TextView android:id="@+id/hora1415a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="14:00 - 15:00" android:padding="3dp"/>
-                                <TextView android:id="@+id/curso1415a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                                <TextView android:id="@+id/profesor1415a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                            </TableRow>
+                                <TableRow>
+                                    <TextView android:id="@+id/hora1314a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="13:00 - 14:00" android:padding="3dp"/>
+                                    <TextView android:id="@+id/curso1314a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                    <TextView android:id="@+id/profesor1314a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                </TableRow>
 
-                            <TableRow>
-                                <TextView android:id="@+id/hora1516a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="15:00 - 16:00" android:padding="3dp"/>
-                                <TextView android:id="@+id/curso1516a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                                <TextView android:id="@+id/profesor1516a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                            </TableRow>
+                                <TableRow>
+                                    <TextView android:id="@+id/hora1415a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="14:00 - 15:00" android:padding="3dp"/>
+                                    <TextView android:id="@+id/curso1415a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                    <TextView android:id="@+id/profesor1415a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                </TableRow>
 
-                            <TableRow>
-                                <TextView android:id="@+id/hora1617a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="16:00 - 17:00" android:padding="3dp"/>
-                                <TextView android:id="@+id/curso1617a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                                <TextView android:id="@+id/profesor1617a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                            </TableRow>
+                                <TableRow>
+                                    <TextView android:id="@+id/hora1516a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="15:00 - 16:00" android:padding="3dp"/>
+                                    <TextView android:id="@+id/curso1516a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                    <TextView android:id="@+id/profesor1516a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                </TableRow>
 
-                            <TableRow>
-                                <TextView android:id="@+id/hora1718a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="17:00 - 18:00" android:padding="3dp"/>
-                                <TextView android:id="@+id/curso1718a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                                <TextView android:id="@+id/profesor1718a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                            </TableRow>
+                                <TableRow>
+                                    <TextView android:id="@+id/hora1617a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="16:00 - 17:00" android:padding="3dp"/>
+                                    <TextView android:id="@+id/curso1617a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                    <TextView android:id="@+id/profesor1617a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                </TableRow>
 
-                            <TableRow>
-                                <TextView android:id="@+id/hora1819a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="18:00 - 19:00" android:padding="3dp"/>
-                                <TextView android:id="@+id/curso1819a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                                <TextView android:id="@+id/profesor1819a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                            </TableRow>
+                                <TableRow>
+                                    <TextView android:id="@+id/hora1718a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="17:00 - 18:00" android:padding="3dp"/>
+                                    <TextView android:id="@+id/curso1718a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                    <TextView android:id="@+id/profesor1718a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                </TableRow>
 
-                            <TableRow>
-                                <TextView android:id="@+id/hora1920a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="19:00 - 20:00" android:padding="3dp"/>
-                                <TextView android:id="@+id/curso1920a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                                <TextView android:id="@+id/profesor1920a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                            </TableRow>
+                                <TableRow>
+                                    <TextView android:id="@+id/hora1819a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="18:00 - 19:00" android:padding="3dp"/>
+                                    <TextView android:id="@+id/curso1819a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                    <TextView android:id="@+id/profesor1819a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                </TableRow>
 
-                            <TableRow>
-                                <TextView android:id="@+id/hora2021a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="20:00 - 21:00" android:padding="3dp"/>
-                                <TextView android:id="@+id/curso2021a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                                <TextView android:id="@+id/profesor2021a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                            </TableRow>
+                                <TableRow>
+                                    <TextView android:id="@+id/hora1920a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="19:00 - 20:00" android:padding="3dp"/>
+                                    <TextView android:id="@+id/curso1920a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                    <TextView android:id="@+id/profesor1920a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                </TableRow>
 
-                            <TableRow>
-                                <TextView android:id="@+id/hora2122a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="21:00 - 22:00" android:padding="3dp"/>
-                                <TextView android:id="@+id/curso2122a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                                <TextView android:id="@+id/profesor2122a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
-                            </TableRow>
-                        </TableLayout>
+                                <TableRow>
+                                    <TextView android:id="@+id/hora2021a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="20:00 - 21:00" android:padding="3dp"/>
+                                    <TextView android:id="@+id/curso2021a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                    <TextView android:id="@+id/profesor2021a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                </TableRow>
 
-                </LinearLayout>
+                                <TableRow>
+                                    <TextView android:id="@+id/hora2122a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="21:00 - 22:00" android:padding="3dp"/>
+                                    <TextView android:id="@+id/curso2122a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                    <TextView android:id="@+id/profesor2122a" android:background="@drawable/cell_cuerpo" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:text="" android:padding="3dp"/>
+                                </TableRow>
+                            </TableLayout>
 
-            </ScrollView>
+                    </LinearLayout>
+
+                </ScrollView>
+            </HorizontalScrollView>
         </LinearLayout>
     </RelativeLayout>
 

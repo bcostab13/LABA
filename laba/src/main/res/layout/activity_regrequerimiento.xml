@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Registro de Incidencia"
+                android:text="Registro de Requerimientos"
                 android:id="@+id/textViewRegIncid"
                 android:layout_marginTop="15dp"
                 android:layout_alignParentTop="true"
@@ -60,17 +60,23 @@
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-
                     android:layout_marginTop="0dp"
                     android:weightSum="1"
                     android:gravity="center"
                     >
 
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="Fecha Registro:"
+                        />
+
                     <EditText
                         android:id="@+id/editFecha"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.9"
+                        android:layout_weight="0.6"
                         android:hint="Fecha"
                         android:textSize="14dp"
                         android:editable="false"
@@ -97,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.25"
                         android:text="Lugar:"
-                    />
+                        />
                     <Spinner
                         android:id="@+id/spinnerLugar"
                         android:layout_width="0dp"
@@ -135,13 +141,49 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/formextra"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/form4"
+                    android:layout_marginTop="0dp"
+                    android:weightSum="1"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+
+                        android:id="@+id/textViewFecha"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        android:text="Fecha Límite:"/>
+
+                    <EditText
+                        android:id="@+id/editTextfechaLimite"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.45">
+                    </EditText>
+
+                    <Button
+                        android:id="@+id/buttonSelectFecha"
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/botonpulsado"
+                        android:drawableLeft="@drawable/ic_action_time"
+                        android:layout_marginLeft="5dp"
+                        />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/form5"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/form4"
+                    android:layout_below="@+id/formextra"
                     android:layout_marginTop="0dp"
                     android:weightSum="1"
                     android:gravity="center"
@@ -157,7 +199,7 @@
                         android:textSize="14dp"
                         android:gravity="left|top"
                         android:maxLength="250"
-                         />
+                        />
 
                 </LinearLayout>
 
