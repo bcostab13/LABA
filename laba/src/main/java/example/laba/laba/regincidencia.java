@@ -5,12 +5,17 @@ package example.laba.laba;
  */
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.text.format.Time;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,9 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class regincidencia extends Activity {
@@ -50,8 +53,8 @@ public class regincidencia extends Activity {
     //atributos
     private String URL_BASE="http://helpdeskfisi20.esy.es";
     private static final String TAG="PostAdapter";
-    private String URL_JSON="/registrarSolicitud.php";
     private String URL_JSON_INC="/registrarIncidencia.php";
+    private String direccion;
     //agregamos el Administrador de Colas de Peticiones de Volley
     private RequestQueue requestQueue;
     StringRequest jsArrayRequest,jsArrayRequest2;
@@ -59,9 +62,10 @@ public class regincidencia extends Activity {
     //atributos de la interfaz
     Button bEnviar;
     Spinner spinnerLug,spinnerCat;
-    String lugar,cat;
+    String lugar="Lab 1",cat="Indeterminada";
     EditText textFecha,textDesc;
-    int cod_op=0;
+    int cod_op2=0,codigo;
+    String cod_op;
     UsuarioGeneral user;
     String fecha,descripcion,coddeuser;
 
@@ -76,7 +80,6 @@ public class regincidencia extends Activity {
         textFecha=(EditText)findViewById(R.id.editFecha);
         spinnerCat = (Spinner) findViewById(R.id.spinnerCategoria);
         textDesc=(EditText)findViewById(R.id.desc);
-        cod_op=getIntent().getIntExtra("codigo",0);
         List<UsuarioGeneral> listaUser=UsuarioGeneral.listAll(UsuarioGeneral.class);
         user=listaUser.get(0);
         traductor=new ResolverNombres();
@@ -209,81 +212,93 @@ public class regincidencia extends Activity {
         bEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ResolverNombres rn=new ResolverNombres();
-                lugar=rn.getTrad(lugar);
-                descripcion=textDesc.getText().toString();
-                final String usuarioE=user.getCodigo();
-                coddeuser=String.valueOf(cod_op);
-                final String categ=cat;
-                for (int i=0;i<4-String.valueOf(cod_op).length();i++){
-                    coddeuser="0"+coddeuser;
+                try {
+                    List<Marca> lista = Marca.listAll(Marca.class);
+                    //Tag.deleteAll(Tag.class);
+                    codigo = lista.get(0).getCode();
+                }catch (Exception e){
+                    Marca marca=new Marca(0);
+                    marca.save();
+                    List<Marca> lista = Marca.listAll(Marca.class);
+                    Log.d("ID", "id=" + lista.get(0).getId());
+                    codigo = lista.get(0).getCode();
                 }
-                final String codInc="I"+usuarioE.substring(5)+coddeuser;
-                //ingresamos la solicitud
-                jsArrayRequest=new StringRequest(
-                        Request.Method.POST,
-                        URL_BASE+URL_JSON,
-                        new Response.Listener<String>(){
+                //obtenemos codigo
+                Log.d("Codigo", "elemento=" + codigo);
+                    cod_op=""+codigo;
+                for (int i=0;i<4-String.valueOf(codigo).length();i++){
+                    cod_op="0"+cod_op;
+                }
+                Log.d("Codigo","cod_op="+cod_op);
 
-                            @Override
-                            public void onResponse(String response) {
-                                //Toast.makeText(regincidencia.this,"Llego hasta aqui",Toast.LENGTH_LONG).show();
-                                Marca cont = Marca.findById(Marca.class, (long) 1);
-                                cont.setCode(cont.getCode()+1);
-                                cont.save(); // updates the previous entry with new values.
+                ResolverNombres rn = new ResolverNombres();
+                lugar = rn.getTrad(lugar);
+                descripcion = textDesc.getText().toString();
+                final String usuarioE = user.getCodigo();
+                final String codInc = "I" + usuarioE.substring(5) + cod_op;
+
+                if (conexionInternet()) {
+                    //iniciar envio de solicitud a BD
+                    //ingresamos datos de requerimiento
+                    direccion=URL_BASE + URL_JSON_INC+"?codsol="+codInc+"&fecreg="+fecha
+                            +"&desc="+descripcion+"&im="+"/img/aus_software.jpg"+"&codub="
+                            +lugar+"&codus="+usuarioE+"&categ="+cat;
+                    direccion=direccion.replace(" ","%20");
+                    direccion=direccion.replace("í","i");
+                    direccion=direccion.replace("á","a");
+                    direccion=direccion.replace("é","e");
+                    direccion=direccion.replace("ó","o");
+                    direccion=direccion.replace("ú","u");
+                    Log.d("Direccion",direccion);
+
+                    //ingresamos la solicitud
+                    jsArrayRequest = new StringRequest(
+                            Request.Method.GET,
+                            direccion,
+                            new Response.Listener<String>() {
+
+                                @Override
+                                public void onResponse(String response) {
+                                    Toast.makeText(regincidencia.this,"Incidencia Registrada",Toast.LENGTH_LONG).show();
+                                    textDesc.setText("");
+                                    spinnerLug.setSelection(0);
+                                    spinnerCat.setSelection(0);
+                                    lugar="Lab 1";
+                                    cat="Indeterminado";
+                                    //actualizamos el indice
+                                    Marca cont = Marca.findById(Marca.class, (long) 1);
+                                    cont.setCode(cont.getCode() + 1);
+                                    cont.save();
+                                }
+                            },
+                            new Response.ErrorListener() {
+
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+
+                                }
                             }
-                        },
-                        new Response.ErrorListener() {
+                    ) ;
+                    jsArrayRequest.setTag("solicitud");
+                    requestQueue.add(jsArrayRequest);
+                }
 
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
-                            }
-                        }
-                ){
-                    @Override
-                    protected Map<String,String> getParams(){
-                        Map<String,String> params=new HashMap<String, String>();
-                        params.put("codsol",codInc);
-                        params.put("fecreg",fecha);
-                        params.put("desc",descripcion);
-                        params.put("im","/img/aus_software.jpg");
-                        params.put("codub",lugar);
-                        params.put("codus",usuarioE);
-                        return params;
-                    }
-                };
-                requestQueue.add(jsArrayRequest);
-
-                //ingresamos datos de incidencia
-                jsArrayRequest2=new StringRequest(
-                        Request.Method.POST,
-                        URL_BASE+URL_JSON_INC,
-                        new Response.Listener<String>(){
-
-                            @Override
-                            public void onResponse(String response) {
-                                Toast.makeText(regincidencia.this,"Solicitud Registrada",Toast.LENGTH_LONG).show();
-                                textDesc.setText("");
-                            }
-                        },
-                        new Response.ErrorListener() {
-
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
-                            }
-                        }
-                ){
-                    @Override
-                    protected Map<String,String> getParams(){
-                        Map<String,String> params=new HashMap<String, String>();
-                        params.put("codsol",codInc);
-                        params.put("categoria",cat);
-                        return params;
-                    }
-                };
-                requestQueue.add(jsArrayRequest2);
+                else{
+                    //iniciar envio de solicitud por mensaje de texto
+                    String tel="943434934";
+                    String sms="REGISTRO INCIDENCIA  Codigo:"+cod_op+"  Fecha:"+fecha+
+                            "  Descripcion:"+descripcion+ "  Im:"+"/img/aus_software.jpg"+
+                            "  Ubicacion:"+lugar+"  Usuario:"+usuarioE+"  Categoria:"+cat;
+                    Uri uri = Uri.parse("smsto:"+tel);
+                    Intent it = new Intent(Intent.ACTION_SENDTO, uri);
+                    it.putExtra("sms_body", sms);
+                    startActivity(it);
+                    textDesc.setText("");
+                    spinnerLug.setSelection(0);
+                    spinnerCat.setSelection(0);
+                    lugar="Lab 1";
+                    cat="Indeterminado";
+                }
             }
         });
 
@@ -293,6 +308,58 @@ public class regincidencia extends Activity {
 
 
     }
+
+    //////////////////METODOS PARA VERIFICAR CONEXION/////////////////////////////
+
+    private boolean conexionInternet(){
+        if(conectadoWifi()){
+            //showAlertDialog(regincidenciaA.this, "Conexion a Internet",
+            //        "Tu Dispositivo tiene Conexion a Wifi.", true);
+            return true;
+        }else{
+            if(conectadoRedMovil()){
+                //showAlertDialog(regincidenciaA.this, "Conexion a Internet",
+                //        "Tu Dispositivo tiene Conexion Movil.", true);
+                return true;
+            }else{
+                //showAlertDialog(regincidenciaA.this, "Conexion a Internet",
+                //        "Tu Dispositivo no tiene Conexion a Internet.", false);
+                return false;
+            }
+        }
+    }
+
+    private boolean conectadoWifi(){
+        ConnectivityManager connectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null) {
+            NetworkInfo info = connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            if (info != null) {
+                if (info.isConnected()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean conectadoRedMovil(){
+        ConnectivityManager connectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null) {
+            NetworkInfo info = connectivity.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+            if (info != null) {
+                if (info.isConnected()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+
+
+
+
 
     //Que el botón de desplegar siempre este sincronizado
     @Override

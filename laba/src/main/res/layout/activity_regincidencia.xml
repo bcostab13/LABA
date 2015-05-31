@@ -66,15 +66,24 @@
                     android:gravity="center"
                     >
 
+                    <TextView
+                        style="@style/TextoSugerido"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Registro:"
+                        android:layout_weight="0.3"
+                        />
+
                     <EditText
                         android:id="@+id/editFecha"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.9"
+                        android:layout_weight="0.65"
                         android:hint="Fecha"
-                        android:textSize="14dp"
+                        android:textSize="15dp"
                         android:editable="false"
-                        android:enabled="true" />
+                        android:enabled="true"
+                        />
 
                 </LinearLayout>
 
@@ -92,17 +101,19 @@
                     >
 
                     <TextView
+                        style="@style/TextoSugerido"
                         android:id="@+id/textViewLugar"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.25"
+                        android:layout_weight="0.3"
                         android:text="Lugar:"
+
                     />
                     <Spinner
                         android:id="@+id/spinnerLugar"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.6"></Spinner>
+                        android:layout_weight="0.65"></Spinner>
 
                 </LinearLayout>
 
@@ -120,17 +131,20 @@
                     >
 
                     <TextView
+                        style="@style/TextoSugerido"
                         android:id="@+id/textViewCat"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.25"
-                        android:text="Categoría:"/>
+                        android:layout_weight="0.3"
+                        android:text="Categoría:"
+
+                        />
 
                     <Spinner
                         android:id="@+id/spinnerCategoria"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.6">
+                        android:layout_weight="0.65">
                     </Spinner>
 
                 </LinearLayout>
@@ -150,13 +164,13 @@
                     <EditText
                         android:id="@+id/desc"
                         android:layout_width="0dp"
-                        android:layout_weight=".9"
+                        android:layout_weight=".95"
                         android:layout_height="100dp"
                         android:inputType="textMultiLine"
                         android:hint="Descripcion"
-                        android:textSize="14dp"
+                        android:textSize="15dp"
                         android:gravity="left|top"
-                        android:maxLength="250"
+                        android:maxLength="200"
                          />
 
                 </LinearLayout>
@@ -165,6 +179,7 @@
                 <LinearLayout
                     android:id="@+id/form6"
                     android:orientation="horizontal"
+                    android:paddingTop="5dp"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/form5"
@@ -173,13 +188,11 @@
                     android:gravity="center">
 
                     <Button
-                        android:layout_width="80dp"
-                        android:layout_height="30dp"
-                        android:text="Registrar"
+                        style="@style/BotonOperacion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Registrar"
                         android:id="@+id/buttonRegistrar"
-                        android:height="10dp"
-                        android:textSize="12dp"
-                        android:background="@drawable/botonpulsado"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="2dp"

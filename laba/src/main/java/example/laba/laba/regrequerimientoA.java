@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -63,9 +64,10 @@ public class regrequerimientoA extends Activity {
     String direccion;
 
     //atributos de la interfaz
-    Button bEnviar,bFecha;
+    Button bEnviar;
+    ImageButton bFecha;
     Spinner spinnerLug,spinnerCat;
-    String lugar,cat,fechaLi="";
+    String lugar="Dentro de la Facultad",cat="Instalación de Software",fechaLi="";
     EditText textFecha,textDesc,textLimite;
     int cod_op2=0,codigo;
     String cod_op,codInc;
@@ -83,7 +85,7 @@ public class regrequerimientoA extends Activity {
 
         //iniciar componentes
         bEnviar = (Button) findViewById(R.id.buttonRegistrar);
-        bFecha= (Button) findViewById(R.id.buttonSelectFecha);
+        bFecha= (ImageButton) findViewById(R.id.buttonSelectFecha);
         textLimite=(EditText) findViewById(R.id.editTextfechaLimite);
         spinnerLug = (Spinner) findViewById(R.id.spinnerLugar);
         textFecha=(EditText)findViewById(R.id.editFecha);
@@ -124,7 +126,7 @@ public class regrequerimientoA extends Activity {
 
         //declaramos un adapter para usar un array generico de java
         ArrayAdapter<CharSequence> adaptadorLug = ArrayAdapter.createFromResource(this,
-                R.array.lugaresAlumno, android.R.layout.simple_spinner_item);
+                R.array.lugaresreq, android.R.layout.simple_spinner_item);
 
         //enlazamos el spinner
         adaptadorLug.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -134,7 +136,7 @@ public class regrequerimientoA extends Activity {
         //OnItemSelected=cuando se hace click
         //onNothingSelected=lo que pasa cuando no seleccionas nada
 
-        final String[] losLugares=getResources().getStringArray(R.array.lugaresAlumno);
+        final String[] losLugares=getResources().getStringArray(R.array.lugaresreq);
         spinnerLug.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener(){
                     //cuando hago clic en uno
@@ -198,11 +200,11 @@ public class regrequerimientoA extends Activity {
 
         //////////////////SETEO DE SPINNER CATEGORIA/////////////////////////
 
-        final String[] categorias=getResources().getStringArray(R.array.fallos);
+        final String[] categorias=getResources().getStringArray(R.array.categoriasreq);
 
         // Creamos el ArrayAdapter
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.fallos, android.R.layout.simple_spinner_item);
+                R.array.categoriasreq, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
@@ -278,6 +280,11 @@ public class regrequerimientoA extends Activity {
                             +"&desc="+descripcion+"&im="+"/img/aus_software.jpg"+"&codub="
                             +lugar+"&codus="+usuarioE+"&fechali="+fechaLi+"&categ="+cat;
                     direccion=direccion.replace(" ","%20");
+                    direccion=direccion.replace("í","i");
+                    direccion=direccion.replace("á","a");
+                    direccion=direccion.replace("é","e");
+                    direccion=direccion.replace("ó","o");
+                    direccion=direccion.replace("ú","u");
 
                     jsArrayRequest2 = new StringRequest(
                             Request.Method.GET,
@@ -288,9 +295,12 @@ public class regrequerimientoA extends Activity {
                                 public void onResponse(String response) {
                                     Toast.makeText(regrequerimientoA.this, "Requerimiento Registrado", Toast.LENGTH_LONG).show();
                                     textDesc.setText("");
+                                    lugar="Dentro de la Facultad";
+                                    cat="Instalación de Software";
+                                    spinnerCat.setSelection(0);
+                                    spinnerLug.setSelection(0);
                                     //actualizamos el indice
                                     Marca cont = Marca.findById(Marca.class, (long) 1);
-                                    cont.getId();
                                     cont.setCode(cont.getCode()+1);
                                     cont.save(); // updates the previous entry with new values.
                                 }
@@ -320,11 +330,10 @@ public class regrequerimientoA extends Activity {
                     Intent it = new Intent(Intent.ACTION_SENDTO, uri);
                     it.putExtra("sms_body", sms);
                     startActivity(it);
-                    //actualizamos el indice
-                    Marca cont = Marca.findById(Marca.class, (long) 1);
-                    cont.getId();
-                    cont.setCode(cont.getCode()+1);
-                    cont.save();
+                    lugar="Dentro de la Facultad";
+                    cat="Instalación de Software";
+                    spinnerCat.setSelection(0);
+                    spinnerLug.setSelection(0);
                 }
             }
         });

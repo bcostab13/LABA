@@ -2,12 +2,15 @@
 <resources>
     <string-array name="fallos">
         <item>Indeterminado</item>
+        <item>Cambio de Configuración</item>
+        <item>No Conocer Procedimiento</item>
+        <item>Fallo de Hardware</item>
+        <item>Ausencia de Hardware</item>
         <item>Inestabilidad o Reseteo</item>
         <item>Incompatibilidad o Lentitud</item>
         <item>Ausencia de Software</item>
-        <item>Fallo de Hardware</item>
-        <item>Ausencia de Hardware</item>
         <item>Fallo de Red</item>
+        <item>No Conexión Física de Red</item>
     </string-array>
 
     <string-array name="lugares">
@@ -59,6 +62,20 @@
         <item>Aula 206</item>
         <item>Aula FAM1</item>
         <item>Aula FAM2</item>
+    </string-array>
+
+    <string-array name="categoriasreq">
+        <item>Instalación de Software</item>
+        <item>Instalación de Sist.Operativos</item>
+        <item>Instalación de Driver/Dispositivos</item>
+        <item>Formateado de PC</item>
+        <item>Limpieza de Disco</item>
+        <item>Desfragmentación de Disco</item>
+    </string-array>
+
+    <string-array name="lugaresreq">
+        <item>Dentro de la Facultad</item>
+        <item>Fuera de la Facultad</item>
     </string-array>
 
 

@@ -66,17 +66,18 @@
                     >
 
                     <TextView
+                        style="@style/TextoSugerido"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.25"
-                        android:text="Fecha Registro:"
+                        android:layout_weight="0.3"
+                        android:text="Registro:"
                         />
 
                     <EditText
                         android:id="@+id/editFecha"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.65"
                         android:hint="Fecha"
                         android:textSize="14dp"
                         android:editable="false"
@@ -98,17 +99,18 @@
                     >
 
                     <TextView
+                        style="@style/TextoSugerido"
                         android:id="@+id/textViewLugar"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.25"
+                        android:layout_weight="0.3"
                         android:text="Lugar:"
                         />
                     <Spinner
                         android:id="@+id/spinnerLugar"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.6"></Spinner>
+                        android:layout_weight="0.65"></Spinner>
 
                 </LinearLayout>
 
@@ -126,17 +128,18 @@
                     >
 
                     <TextView
+                        style="@style/TextoSugerido"
                         android:id="@+id/textViewCat"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.25"
+                        android:layout_weight="0.3"
                         android:text="Categoría:"/>
 
                     <Spinner
                         android:id="@+id/spinnerCategoria"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.6">
+                        android:layout_weight="0.65">
                     </Spinner>
 
                 </LinearLayout>
@@ -153,11 +156,11 @@
                     >
 
                     <TextView
-
+                        style="@style/TextoSugerido"
                         android:id="@+id/textViewFecha"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.25"
+                        android:layout_weight="0.3"
                         android:text="Fecha Límite:"/>
 
                     <EditText
@@ -167,14 +170,15 @@
                         android:layout_weight="0.45">
                     </EditText>
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/buttonSelectFecha"
-                        android:layout_width="36dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.2"
                         android:layout_height="wrap_content"
                         android:background="@drawable/botonpulsado"
                         android:drawableLeft="@drawable/ic_action_time"
                         android:layout_marginLeft="5dp"
-                        />
+                        android:src="@drawable/ic_action_time" />
 
                 </LinearLayout>
 
@@ -212,15 +216,16 @@
                     android:layout_below="@+id/form5"
                     android:layout_marginTop="0dp"
                     android:weightSum="1"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:paddingTop="5dp">
 
                     <Button
-                        android:layout_width="80dp"
-                        android:layout_height="30dp"
+                        style="@style/BotonOperacion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Registrar"
                         android:id="@+id/buttonRegistrar"
                         android:height="10dp"
-                        android:textSize="12dp"
                         android:background="@drawable/botonpulsado"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"

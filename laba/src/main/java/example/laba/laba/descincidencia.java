@@ -93,6 +93,9 @@ public class descincidencia extends Activity {
                                     actEst.setEnabled(true);
                                 break;
                             case 2: estaux="Terminado";
+                                break;
+                            case 3: estaux="Cancelado";
+                                break;
                         }
                         est.setText(estaux);
                         cod.setText(incaux.getCod_solic());
