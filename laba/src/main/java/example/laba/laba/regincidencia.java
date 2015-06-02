@@ -251,6 +251,7 @@ public class regincidencia extends Activity {
                     direccion=direccion.replace("ú","u");
                     Log.d("Direccion",direccion);
 
+
                     //ingresamos la solicitud
                     jsArrayRequest = new StringRequest(
                             Request.Method.GET,

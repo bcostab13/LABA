@@ -66,8 +66,8 @@
 
     <string-array name="categoriasreq">
         <item>Instalación de Software</item>
-        <item>Instalación de Sist.Operativos</item>
-        <item>Instalación de Driver/Dispositivos</item>
+        <item>Instalación de Sist.Operativo</item>
+        <item>Instalación de Driver o Dispositivos</item>
         <item>Formateado de PC</item>
         <item>Limpieza de Disco</item>
         <item>Desfragmentación de Disco</item>

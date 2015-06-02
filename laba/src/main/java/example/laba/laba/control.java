@@ -35,8 +35,13 @@ public class control extends Activity{
     ListView listView;
     ArrayAdapter adapter;
 
-    //atributos de Bundle
-    incidencia auxiliar;
+    //////////////////////////////////////////////////////
+
+    //////////////ATRIBUTOS DE TAB2///////////////////////
+    //atributos de la interfaz
+    ListView listViewR;
+    ArrayAdapter adapterR;
+
     //////////////////////////////////////////////////////
 
     @Override
@@ -104,7 +109,7 @@ public class control extends Activity{
         tabs.setCurrentTab(0);
         ////////////////////////////////////////////////////////////////////
 
-        ///////////////////////OBTENCION DE SOLICITUDES/////////////////////
+        ///////////////////////OBTENCION DE INCIDENCIAS/////////////////////
         //obtener instancia de la lista
         listView=(ListView)findViewById(R.id.listViewSolicitudes);
 
@@ -128,6 +133,33 @@ public class control extends Activity{
         });
 
         ///////////////////////////////////////////////////////////////////
+
+        ///////////////////////OBTENCION DE REQUERIMIENTOS/////////////////////
+        //obtener instancia de la lista
+        listViewR=(ListView)findViewById(R.id.listViewRequerimientos);
+
+        //crear y setear adaptador
+        adapterR=new requerimientoAdapter(this);
+
+        listViewR.setAdapter(adapterR);
+
+        //acciones del clic de solicitud
+        listViewR.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d("ClickList", "LLega hasta aca");
+                TextView aux=(TextView)view.findViewById(R.id.textViewNomReq);
+                //Toast.makeText(getApplicationContext(),"Nombre="+aux.getText(),Toast.LENGTH_LONG).show();
+                //enviamos el codigo de solicitud a la siguiente actividad
+                Bundle codS=new Bundle();
+                codS.putString("codigo",aux.getText().toString());
+                startActivity(new Intent(control.this,descrequerimiento.class).putExtras(codS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+            }
+        });
+
+        ///////////////////////////////////////////////////////////////////
+
     }
 
     //Que el botón de desplegar siempre este sincronizado

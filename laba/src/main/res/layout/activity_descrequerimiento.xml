@@ -1,0 +1,325 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contenedorDescInc"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fondomain">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="#FFFFFF"
+            android:alpha="0.9"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descripción de Requerimiento"
+                android:id="@+id/textViewDescRequer"
+                android:layout_marginTop="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp"
+                android:background="#000000"
+                android:padding="4dp"
+                android:textColor="#FFFFFF"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CARGANDO..."
+                android:textAllCaps="true"
+                android:layout_centerInParent="true"
+                android:id="@+id/textViewEstadoRequer"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/textViewDescRequer"
+                android:padding="1dp"
+                android:textColor="#000000"
+                android:textSize="12dp"/>
+
+            <RelativeLayout
+                android:gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_below="@+id/textViewEstadoRequer"
+                android:layout_centerVertical="true">
+
+                <LinearLayout
+                    android:id="@+id/formARequer"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textViewCodRequer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="Código:"
+                        android:textColor="#fff"
+                        android:textStyle="bold"
+                        android:background="#3B0B0B"/>
+
+                    <TextView
+                        android:id="@+id/textViewValCodRequer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.63"
+                        android:text="Cargando..."
+                        android:layout_marginLeft="7dp"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/form0Requer"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/formARequer"
+                    android:weightSum="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textViewTiempoRequer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="F.Registro:"
+                        android:textColor="#fff"
+                        android:textStyle="bold"
+                        android:background="#DF0101"/>
+
+                    <TextView
+                        android:id="@+id/textViewValTiempoRequer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.63"
+                        android:text="Cargando..."
+                        android:layout_marginLeft="7dp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/form7Requer"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/form0Requer"
+                    android:weightSum="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textViewIndFecLiRequer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="F.Límite:"
+                        android:textStyle="bold"
+                    />
+
+                    <TextView
+                        android:id="@+id/textViewValFecLiRequer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.63"
+                        android:text="Cargando..."
+                        android:layout_marginLeft="7dp"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/formRequer"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/form7Requer"
+                    android:weightSum="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textViewCategoriaRequer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="Categoria:"
+                        android:textColor="#fff"
+                        android:textStyle="bold"
+                        android:background="#DF3A01"/>
+
+                    <TextView
+                        android:id="@+id/textViewValCategoriaRequer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.63"
+                        android:text="Cargando"
+                        android:layout_marginLeft="7dp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/form2Requer"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/formRequer"
+                    android:weightSum="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textViewLugarRequer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="Lugar:"
+                        android:textColor="#111111"
+                        android:textStyle="bold"
+                        android:background="#DF7401"/>
+                    <TextView
+                        android:id="@+id/textViewValLugarRequer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.63"
+                        android:text="Cargando..."
+                        android:layout_marginLeft="7dp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/form3Requer"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/form2Requer"
+                    android:weightSum="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textViewUsuarioRequer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="Usuario:"
+                        android:textColor="#111111"
+                        android:textStyle="bold"
+                        android:background="#DBA901"/>
+                    <TextView
+                        android:id="@+id/textViewValUsuarioRequer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.63"
+                        android:text="Cargando..."
+                        android:layout_marginLeft="7dp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/form4Requer"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/form3Requer"
+                    android:weightSum="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textViewDescripRequer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.93"
+                        android:text="Descripción:"
+                        android:textColor="#111111"
+                        android:textStyle="bold"
+                        android:background="#D7DF01"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/form5Requer"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/form4Requer"
+                    android:weightSum="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textViewValDescripRequer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.93"
+                        android:text="Cargando..."
+                        android:textColor="#111111"
+                        android:background="#FFFFFF"
+                        android:inputType="textMultiLine" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/form6Requer"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="7dp"
+                    android:layout_below="@+id/form5Requer"
+                    android:weightSum="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="0.93"
+                        android:src="@drawable/helpdesk"
+                        android:scaleType="centerInside"/>
+
+                    <Button
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:text="Actualizar Estado"
+                        android:enabled="false"
+                        android:id="@+id/buttonModEstRequer"
+                        android:height="10dp"
+                        android:textSize="12dp"
+                        android:background="@drawable/botonpulsado"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

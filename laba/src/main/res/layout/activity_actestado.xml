@@ -71,6 +71,7 @@
                      <RadioGroup
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
+                         android:id="@+id/radiogroupestados"
                          >
                     <RadioButton
                        android:layout_width="160dp"
@@ -81,22 +82,12 @@
 
                        />
 
-                     <RadioButton
-                        android:layout_width="160dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rbatendido"
-                        android:text="Atendido"
-
-                        android:layout_below="@+id/rbatendiendo"
-
-                        />
-
                     <RadioButton
                         android:layout_width="160dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/rbfinalizado"
                         android:text="Finalizado"
-                        android:layout_below="@+id/rbatendido"
+                        android:layout_below="@+id/rbatendiendo"
 
                         />
 
@@ -131,13 +122,12 @@
                         android:scaleType="centerInside"/>
 
                     <Button
-                        android:layout_width="80dp"
-                        android:layout_height="25dp"
-                        android:text="Actualizar"
+                        style="@style/BotonOperacion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Actualizar"
                         android:enabled="true"
                         android:id="@+id/buttonModEst"
-                        android:textSize="12dp"
-                        android:background="@drawable/botonpulsado"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         />
