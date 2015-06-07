@@ -1,9 +1,14 @@
 package example.laba.laba;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -62,5 +67,92 @@ public class alumno extends Activity{
                 startActivity(lanzar_registro);
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+        // Esto es lo que hace mi botón al pulsar ir a atrás
+            AlertDialog.Builder builder = new AlertDialog.Builder(alumno.this);
+            builder.setMessage("¿Deseas salir de Laba?")
+                    .setTitle("Cerrar Aplicación")
+                    .setCancelable(false)
+                    .setNegativeButton("No",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            })
+                    .setPositiveButton("Si",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    finish();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_inicial, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.MnuOpc1:
+                Log.i("ActionBar", "Cerrar Sesión");
+                AlertDialog.Builder builder = new AlertDialog.Builder(alumno.this);
+                builder.setMessage("Al cerrar sesión, necesitará estar conectado a internet para volver" +
+                        " a entrar. ¿Desea cerrar sesión sesión de todas formas?")
+                        .setTitle("Cerrar Sesión")
+                        .setCancelable(false)
+                        .setNegativeButton("No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                })
+                        .setPositiveButton("Si",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        UsuarioGeneral.deleteAll(UsuarioGeneral.class);
+                                        finish();
+                                        Intent lanzar_sincronizar=new Intent(alumno.this,sincronizar.class);
+                                        startActivity(lanzar_sincronizar);
+                                    }
+                                });
+                AlertDialog alert = builder.create();
+                alert.show();
+                return true;
+            case R.id.MnuOpc2:
+                Log.i("ActionBar", "Salir");
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(alumno.this);
+                builder2.setMessage("¿Deseas salir de Laba?")
+                        .setTitle("Cerrar Aplicación")
+                        .setCancelable(false)
+                        .setNegativeButton("No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                })
+                        .setPositiveButton("Si",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        finish();
+                                    }
+                                });
+                AlertDialog alert2 = builder2.create();
+                alert2.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

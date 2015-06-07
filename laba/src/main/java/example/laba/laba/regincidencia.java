@@ -313,47 +313,18 @@ public class regincidencia extends Activity {
     //////////////////METODOS PARA VERIFICAR CONEXION/////////////////////////////
 
     private boolean conexionInternet(){
-        if(conectadoWifi()){
-            //showAlertDialog(regincidenciaA.this, "Conexion a Internet",
-            //        "Tu Dispositivo tiene Conexion a Wifi.", true);
+
+        if(isNetworkAvailable()){
             return true;
         }else{
-            if(conectadoRedMovil()){
-                //showAlertDialog(regincidenciaA.this, "Conexion a Internet",
-                //        "Tu Dispositivo tiene Conexion Movil.", true);
-                return true;
-            }else{
-                //showAlertDialog(regincidenciaA.this, "Conexion a Internet",
-                //        "Tu Dispositivo no tiene Conexion a Internet.", false);
-                return false;
-            }
+            return false;
         }
     }
 
-    private boolean conectadoWifi(){
-        ConnectivityManager connectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivity != null) {
-            NetworkInfo info = connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-            if (info != null) {
-                if (info.isConnected()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean conectadoRedMovil(){
-        ConnectivityManager connectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivity != null) {
-            NetworkInfo info = connectivity.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-            if (info != null) {
-                if (info.isConnected()) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 

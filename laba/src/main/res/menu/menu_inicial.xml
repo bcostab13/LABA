@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/MnuMas" android:title="Más"
+        android:icon="@drawable/ic_action_overflow"
+        android:showAsAction="always">
+        <menu>
+            <item android:id="@+id/MnuOpc1" android:title="Cerrar Sesión"
+                android:icon="@drawable/ic_perm"
+                android:showAsAction="always|withText"></item>
+            <item android:id="@+id/MnuOpc2" android:title="Salir"
+                android:icon="@drawable/ic_power"
+                android:showAsAction="always|withText"></item>
+        </menu>
+    </item>
+
+
+
+
+</menu>

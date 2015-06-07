@@ -114,15 +114,11 @@
                 android:gravity="center_horizontal"
                 android:paddingTop="8dp">
                 <Button
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:text="Ingresar"
-                    android:id="@+id/button"
-                    android:height="10dp"
-                    android:textSize="12dp"
-                    android:background="@drawable/botonpulsado"
-
-                />
+                    style="@style/BotonOperacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Ingresar"
+                    android:id="@+id/button" />
             </LinearLayout>
 
         </RelativeLayout>

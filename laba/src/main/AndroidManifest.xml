@@ -168,6 +168,28 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="example.laba.laba.bienvenido"
+            android:label="LABA"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.BIENVENIDO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="example.laba.laba.sincronizar"
+            android:label="INICIAR SINCRONIZACION"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.SINCRONIZAR" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
 
         <meta-data android:name="DATABASE" android:value="sugar_example.db" />
         <meta-data android:name="VERSION" android:value="2" />
