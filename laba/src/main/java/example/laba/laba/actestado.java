@@ -15,6 +15,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.parse.ParseInstallation;
+import com.parse.ParsePush;
+import com.parse.ParseQuery;
 
 /**
  * Created by Brenda on 11/05/2015.
@@ -30,9 +33,10 @@ public class actestado extends Activity{
     private String URL_BASE="http://helpdeskfisi20.esy.es";
     private static final String TAG="DatosIncidencia";
     private String URL_JSON="/actualizarEstado.php?solicitud=";
+    private String URL_ID="/consultarId.php?codsol=";
     //agregamos el Administrador de Colas de Peticiones de Volley
     private RequestQueue requestQueue2;
-    StringRequest jsArrayRequest2;
+    StringRequest jsArrayRequest2,StringRequestID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +100,35 @@ public class actestado extends Activity{
                 );
 
                 requestQueue2.add(jsArrayRequest2);
+
+                //envio de notificacion push al usuario
+                StringRequestID=new StringRequest(
+                        Request.Method.GET,
+                        URL_BASE+URL_ID+cod,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(actestado.this,"ID="+response,Toast.LENGTH_LONG).show();
+                                // Create our Installation query
+                                ParseQuery pushQuery = ParseInstallation.getQuery();
+                                pushQuery.whereEqualTo("usuario",response);
+
+                                // Send push notification to query
+                                ParsePush push = new ParsePush();
+                                push.setQuery(pushQuery); // Set our Installation query
+                                push.setMessage("Tu solicitud será atendida en los próximos minutos.");
+                                push.sendInBackground();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(actestado.this,"Algo paso",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+
+                requestQueue2.add(StringRequestID);
 
             }
         });

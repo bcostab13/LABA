@@ -28,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.parse.ParseInstallation;
 
 import java.util.List;
 
@@ -247,7 +248,8 @@ public class regincidenciaA extends Activity{
                     //ingresamos datos de requerimiento
                     direccion=URL_BASE + URL_JSON_INC+"?codsol="+codInc+"&fecreg="+fecha
                             +"&desc="+descripcion+"&im="+"/img/aus_software.jpg"+"&codub="
-                            +lugar+"&codus="+usuarioE+"&categ="+cat;
+                            +lugar+"&codus="+usuarioE+"&categ="+cat+"&id="+
+                            ParseInstallation.getCurrentInstallation().get("deviceToken");
                     direccion=direccion.replace(" ","%20");
                     direccion=direccion.replace("í","i");
                     direccion=direccion.replace("á","a");

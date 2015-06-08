@@ -32,6 +32,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.parse.ParseInstallation;
 
 import java.util.List;
 
@@ -149,7 +150,7 @@ public class regincidencia extends Activity {
         ) {     };
 
         //Creamos nuestro menú
-        final String[] opciones = {"Panel de Control", "Nueva Incidencia", "Control de Solicitudes","Control de Laboratorios","Salir"};
+        final String[] opciones = {"Panel de Control", "Nueva Incidencia", "Control de Solicitudes","Control de Laboratorios"};
         //rellenamos la List view
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,
@@ -161,15 +162,27 @@ public class regincidencia extends Activity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,
                                     int arg2, long arg3) {
-                Toast.makeText(regincidencia.this, "id: " + opciones[arg2],
-                        Toast.LENGTH_SHORT).show();
                 //Se cierra el menú
                 mDrawerLayout.closeDrawers();
-                if(opciones[arg2].equals("Control de Solicitudes")){
-                    Intent lanzar_control=new Intent(regincidencia.this,control.class);
+                if (opciones[arg2].equals("Panel de Control")) {
+                    Intent lanzar_panel = new Intent(regincidencia.this, administrador.class);
+                    finish();
+                    startActivity(lanzar_panel);
+                }
+                if (opciones[arg2].equals("Nueva Incidencia")) {
+                    Toast.makeText(regincidencia.this, "Ya se encuentra en esta sección", Toast.LENGTH_LONG);
+                }
+                if (opciones[arg2].equals("Control de Solicitudes")) {
+                    Intent lanzar_control = new Intent(regincidencia.this, control.class);
                     finish();
                     startActivity(lanzar_control);
                 }
+                if (opciones[arg2].equals("Control de Laboratorios")) {
+                    Intent lanzar_controlab = new Intent(regincidencia.this, contlab.class);
+                    finish();
+                    startActivity(lanzar_controlab);
+                }
+
             }
         });
 
@@ -242,7 +255,8 @@ public class regincidencia extends Activity {
                     //ingresamos datos de requerimiento
                     direccion=URL_BASE + URL_JSON_INC+"?codsol="+codInc+"&fecreg="+fecha
                             +"&desc="+descripcion+"&im="+"/img/aus_software.jpg"+"&codub="
-                            +lugar+"&codus="+usuarioE+"&categ="+cat;
+                            +lugar+"&codus="+usuarioE+"&categ="+cat+"&id="+
+                            ParseInstallation.getCurrentInstallation().get("deviceToken");
                     direccion=direccion.replace(" ","%20");
                     direccion=direccion.replace("í","i");
                     direccion=direccion.replace("á","a");

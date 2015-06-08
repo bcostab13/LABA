@@ -71,6 +71,9 @@ public class sincronizar extends Activity{
         iconoPrincipal.startAnimation(mostrar);
         textoBienvenida.startAnimation(mostrar);
 
+
+
+
         botonIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

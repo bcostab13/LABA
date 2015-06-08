@@ -41,6 +41,7 @@ public class control extends Activity{
     //atributos de la interfaz
     ListView listViewR;
     ArrayAdapter adapterR;
+    TextView textCuenta,textCuentaR;
 
     //////////////////////////////////////////////////////
 
@@ -112,9 +113,10 @@ public class control extends Activity{
         ///////////////////////OBTENCION DE INCIDENCIAS/////////////////////
         //obtener instancia de la lista
         listView=(ListView)findViewById(R.id.listViewSolicitudes);
+        textCuenta=(TextView)findViewById(R.id.textViewIndContSol);
 
         //crear y setear adaptador
-        adapter=new incidenciaAdapter(this);
+        adapter=new incidenciaAdapter(this,textCuenta);
 
         listView.setAdapter(adapter);
 
@@ -137,9 +139,9 @@ public class control extends Activity{
         ///////////////////////OBTENCION DE REQUERIMIENTOS/////////////////////
         //obtener instancia de la lista
         listViewR=(ListView)findViewById(R.id.listViewRequerimientos);
-
+        textCuentaR=(TextView)findViewById(R.id.textViewIndContReq);
         //crear y setear adaptador
-        adapterR=new requerimientoAdapter(this);
+        adapterR=new requerimientoAdapter(this,textCuentaR);
 
         listViewR.setAdapter(adapterR);
 

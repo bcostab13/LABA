@@ -4,25 +4,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.parse.Parse;
+import com.parse.ParseInstallation;
 
 import java.util.List;
 
 
 public class main extends ActionBarActivity {
-    ImageView iconoPrincipal;
-    TextView textoBienvenida;
-    Button botonIniciar;
-    EditText edituser,editpassword;
     int codigo=0;
     UsuarioGeneral user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ////////////////////////PARSE NOTIFICACIONES PUSH//////////////////////
+        Parse.initialize(this, "jnzgcYO5pmbt2iLsqPLU39MuUtweFDPf0L5kp7gn", "OLFZlwSisplR0hGMMX80gpouwvy2JzANxsy0ZzCU");
+        ParseInstallation instalacion=ParseInstallation.getCurrentInstallation();
+        instalacion.put("usuario",instalacion.get("deviceToken").toString());
+        instalacion.saveInBackground();
+
+        ///////////////////////////////////////////////////////////////////////
 
         ///////////////////////////VERIFICAR SINCRONIZACION///////////////////////////////
 

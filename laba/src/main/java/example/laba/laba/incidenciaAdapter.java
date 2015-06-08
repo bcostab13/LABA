@@ -68,6 +68,37 @@ public class incidenciaAdapter extends ArrayAdapter{
         requestQueue.add(jsArrayRequest);
     }
 
+    public incidenciaAdapter(Context context, final TextView numero){
+        super(context,0);
+
+        //creamos una nueva cola de peticiones
+        requestQueue= Volley.newRequestQueue(context);
+        //Gestionar peticion del archivo JSON
+
+        jsArrayRequest=new JsonObjectRequest(
+                Request.Method.POST,
+                URL_BASE+URL_JSON,
+                null,
+                new Response.Listener<JSONObject>(){
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, "RESPUESTA=" + response);
+                        items=parseJson(response);
+                        numero.setText("Hay "+getCount()+" incidencias pendientes.");
+                        notifyDataSetChanged();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG,"Error de Respuesta en JSON: "+error.getMessage());
+                        numero.setText("Hay 0 incidencias pendientes.");
+                    }
+                }
+        );
+        requestQueue.add(jsArrayRequest);
+    }
+
     @Override
     public int getCount() {
         return items!=null? items.size():0;

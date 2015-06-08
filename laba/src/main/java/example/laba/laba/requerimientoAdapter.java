@@ -67,6 +67,36 @@ public class requerimientoAdapter extends ArrayAdapter{
         requestQueue.add(jsArrayRequest);
     }
 
+    public requerimientoAdapter(Context context,final TextView contador){
+        super(context,0);
+        //creamos una nueva cola de peticiones
+        requestQueue= Volley.newRequestQueue(context);
+        //Gestionar peticion del archivo JSON
+
+        jsArrayRequest=new JsonObjectRequest(
+                Request.Method.POST,
+                URL_BASE+URL_JSON,
+                null,
+                new Response.Listener<JSONObject>(){
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, "RESPUESTA=" + response);
+                        items=parseJson(response);
+                        contador.setText("Hay "+getCount()+" requerimientos pendientes.");
+                        notifyDataSetChanged();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG,"Error de Respuesta en JSON: "+error.getMessage());
+                        contador.setText("Hay 0 requerimientos pendientes.");
+                    }
+                }
+        );
+        requestQueue.add(jsArrayRequest);
+    }
+
 
 
     @Override

@@ -32,6 +32,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.parse.ParseInstallation;
 
 import java.util.Calendar;
 import java.util.List;
@@ -278,7 +279,8 @@ public class regrequerimientoA extends Activity {
                             +lugar+"&codus="+usuarioE);
                     direccion=URL_BASE + URL_JSON_REQ+"?codsol="+codInc+"&fecreg="+fecha
                             +"&desc="+descripcion+"&im="+"/img/aus_software.jpg"+"&codub="
-                            +lugar+"&codus="+usuarioE+"&fechali="+fechaLi+"&categ="+cat;
+                            +lugar+"&codus="+usuarioE+"&fechali="+fechaLi+"&categ="+cat+"&id="+
+                            ParseInstallation.getCurrentInstallation().get("deviceToken");
                     direccion=direccion.replace(" ","%20");
                     direccion=direccion.replace("í","i");
                     direccion=direccion.replace("á","a");
