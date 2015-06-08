@@ -111,7 +111,7 @@ public class actestado extends Activity{
                                 Toast.makeText(actestado.this,"ID="+response,Toast.LENGTH_LONG).show();
                                 // Create our Installation query
                                 ParseQuery pushQuery = ParseInstallation.getQuery();
-                                pushQuery.whereEqualTo("usuario",response);
+                                pushQuery.whereEqualTo("deviceToken",response);
 
                                 // Send push notification to query
                                 ParsePush push = new ParsePush();
