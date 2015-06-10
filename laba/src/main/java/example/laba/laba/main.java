@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
-import com.parse.Parse;
-import com.parse.ParseInstallation;
-
 import java.util.List;
 
 
@@ -19,12 +16,12 @@ public class main extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ////////////////////////PARSE NOTIFICACIONES PUSH//////////////////////
+        /*////////////////////////PARSE NOTIFICACIONES PUSH//////////////////////
         Parse.initialize(this, "jnzgcYO5pmbt2iLsqPLU39MuUtweFDPf0L5kp7gn", "OLFZlwSisplR0hGMMX80gpouwvy2JzANxsy0ZzCU");
         ParseInstallation instalacion=ParseInstallation.getCurrentInstallation();
-        instalacion.saveInBackground();
-
-        ///////////////////////////////////////////////////////////////////////
+        //instalacion.saveInBackground();
+        instalacion.saveEventually();
+        ///////////////////////////////////////////////////////////////////////*/
 
         ///////////////////////////VERIFICAR SINCRONIZACION///////////////////////////////
 
