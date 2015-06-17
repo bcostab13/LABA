@@ -15,6 +15,7 @@ public class App extends SugarApp{
         Parse.initialize(this, "jnzgcYO5pmbt2iLsqPLU39MuUtweFDPf0L5kp7gn", "OLFZlwSisplR0hGMMX80gpouwvy2JzANxsy0ZzCU");
         ParseInstallation instalacion=ParseInstallation.getCurrentInstallation();
         instalacion.saveInBackground();
+
     }
 
 }

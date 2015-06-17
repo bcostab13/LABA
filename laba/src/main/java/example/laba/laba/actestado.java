@@ -89,6 +89,7 @@ public class actestado extends Activity{
                             @Override
                             public void onResponse(String response) {
                                 Toast.makeText(actestado.this,"Estado Actualizado",Toast.LENGTH_LONG).show();
+                                finish();
                             }
                         },
                         new Response.ErrorListener() {

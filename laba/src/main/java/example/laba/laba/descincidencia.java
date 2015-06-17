@@ -140,6 +140,7 @@ public class descincidencia extends Activity {
                                         Intent lanzar_actestado=new Intent(descincidencia.this,actestado.class).putExtras(codigo);
                                         lanzar_actestado.putExtras(estado);
                                         lanzar_actestado.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        finish();
                                         startActivity(lanzar_actestado);
 
                                     }
