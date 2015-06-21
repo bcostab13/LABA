@@ -30,9 +30,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.parse.ParseInstallation;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -59,6 +64,10 @@ public class regincidencia extends Activity {
     //agregamos el Administrador de Colas de Peticiones de Volley
     private RequestQueue requestQueue;
     StringRequest jsArrayRequest,jsArrayRequest2;
+
+    private String URL_JSON_ULT="/consultarNumSol.php?cc=";
+    JsonObjectRequest jsArrayRequestUlt;
+    String usuarioE;
 
     //atributos de la interfaz
     Button bEnviar;
@@ -225,80 +234,123 @@ public class regincidencia extends Activity {
         bEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    List<Marca> lista = Marca.listAll(Marca.class);
-                    //Tag.deleteAll(Tag.class);
-                    codigo = lista.get(0).getCode();
-                }catch (Exception e){
-                    Marca marca=new Marca(0);
-                    marca.save();
-                    List<Marca> lista = Marca.listAll(Marca.class);
-                    Log.d("ID", "id=" + lista.get(0).getId());
-                    codigo = lista.get(0).getCode();
-                }
-                //obtenemos codigo
-                Log.d("Codigo", "elemento=" + codigo);
-                    cod_op=""+codigo;
-                for (int i=0;i<4-String.valueOf(codigo).length();i++){
-                    cod_op="0"+cod_op;
-                }
-                Log.d("Codigo","cod_op="+cod_op);
-
-                ResolverNombres rn = new ResolverNombres();
-                lugar = rn.getTrad(lugar);
-                descripcion = textDesc.getText().toString();
-                final String usuarioE = user.getCodigo();
-                final String codInc = "I" + usuarioE.substring(5) + cod_op;
-
                 if (conexionInternet()) {
-                    //iniciar envio de solicitud a BD
-                    //ingresamos datos de requerimiento
-                    direccion=URL_BASE + URL_JSON_INC+"?codsol="+codInc+"&fecreg="+fecha
-                            +"&desc="+descripcion+"&im="+"/img/aus_software.jpg"+"&codub="
-                            +lugar+"&codus="+usuarioE+"&categ="+cat+"&id="+
-                            ParseInstallation.getCurrentInstallation().get("deviceToken");
-                    direccion=direccion.replace(" ","%20");
-                    direccion=direccion.replace("í","i");
-                    direccion=direccion.replace("á","a");
-                    direccion=direccion.replace("é","e");
-                    direccion=direccion.replace("ó","o");
-                    direccion=direccion.replace("ú","u");
-                    Log.d("Direccion",direccion);
 
+                    try {
 
-                    //ingresamos la solicitud
-                    jsArrayRequest = new StringRequest(
-                            Request.Method.GET,
-                            direccion,
-                            new Response.Listener<String>() {
+                        List<Marca> lista = Marca.listAll(Marca.class);
+                        //Tag.deleteAll(Tag.class);
 
-                                @Override
-                                public void onResponse(String response) {
-                                    Toast.makeText(regincidencia.this,"Incidencia Registrada",Toast.LENGTH_LONG).show();
-                                    textDesc.setText("");
-                                    spinnerLug.setSelection(0);
-                                    spinnerCat.setSelection(0);
-                                    lugar="Lab 1";
-                                    cat="Indeterminado";
-                                    //actualizamos el indice
-                                    Marca cont = Marca.findById(Marca.class, (long) 1);
-                                    cont.setCode(cont.getCode() + 1);
-                                    cont.save();
+                        codigo = lista.get(0).getCode();
+                        //obtenemos el numero de la ultima solicitud del usuario
+                        direccion = URL_BASE + URL_JSON_ULT + user.getCodigo();
+                        direccion = direccion.replace(" ", "%20");
+                        direccion = direccion.replace("í", "i");
+                        direccion = direccion.replace("á", "a");
+                        direccion = direccion.replace("é", "e");
+                        direccion = direccion.replace("ó", "o");
+                        direccion = direccion.replace("ú", "u");
+                        Log.d("Direccion", direccion);
+
+                        jsArrayRequestUlt = new JsonObjectRequest(
+                                Request.Method.GET,
+                                direccion,
+                                null,
+                                new Response.Listener<JSONObject>() {
+
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        Log.d("Codigo mas reciente", "RESPUESTA=" + response);
+                                        codigo = parseJsonNum(response);
+                                        //actualizamos el indice
+                                        Marca cont = Marca.findById(Marca.class, (long) 1);
+                                        cont.setCode(codigo);
+                                        cont.save();
+
+                                        //iniciamos ahora el envió de la solicitud
+
+                                        //obtenemos codigo
+                                        Log.d("Codigo", "elemento=" + codigo);
+                                        cod_op=""+codigo;
+                                        for (int i=0;i<4-String.valueOf(codigo).length();i++){
+                                            cod_op="0"+cod_op;
+                                        }
+                                        Log.d("Codigo","cod_op="+cod_op);
+
+                                        ResolverNombres rn = new ResolverNombres();
+                                        lugar = rn.getTrad(lugar);
+                                        descripcion = textDesc.getText().toString();
+                                        usuarioE = user.getCodigo();
+                                        final String codInc = "I" + usuarioE.substring(5) + cod_op;
+
+                                        direccion=URL_BASE + URL_JSON_INC+"?codsol="+codInc+"&fecreg="+fecha
+                                                +"&desc="+descripcion+"&im="+"/img/aus_software.jpg"+"&codub="
+                                                +lugar+"&codus="+usuarioE+"&categ="+cat+"&id="+
+                                                ParseInstallation.getCurrentInstallation().get("deviceToken");
+                                        direccion=direccion.replace(" ","%20");
+                                        direccion=direccion.replace("í","i");
+                                        direccion=direccion.replace("á","a");
+                                        direccion=direccion.replace("é","e");
+                                        direccion=direccion.replace("ó","o");
+                                        direccion=direccion.replace("ú","u");
+                                        Log.d("Direccion",direccion);
+
+                                        //ingresamos la solicitud
+                                        jsArrayRequest = new StringRequest(
+                                                Request.Method.GET,
+                                                direccion,
+                                                new Response.Listener<String>() {
+
+                                                    @Override
+                                                    public void onResponse(String response) {
+                                                        Toast.makeText(regincidencia.this,"Incidencia Registrada",Toast.LENGTH_LONG).show();
+                                                        textDesc.setText("");
+                                                        spinnerLug.setSelection(0);
+                                                        spinnerCat.setSelection(0);
+                                                        lugar="Lab 1";
+                                                        cat="Indeterminado";
+                                                        //actualizamos el indice
+                                                        Marca cont = Marca.findById(Marca.class, (long) 1);
+                                                        //actualizar cuenta en la base de datos
+                                                        cont.setCode(cont.getCode() + 1);
+                                                        cont.save();
+                                                    }
+                                                },
+                                                new Response.ErrorListener() {
+
+                                                    @Override
+                                                    public void onErrorResponse(VolleyError error) {
+
+                                                    }
+                                                }
+                                        ) ;
+                                        jsArrayRequest.setTag("solicitud");
+                                        requestQueue.add(jsArrayRequest);
+                                    }
+                                },
+                                new Response.ErrorListener() {
+
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+
+                                    }
                                 }
-                            },
-                            new Response.ErrorListener() {
+                        );
 
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
+                        requestQueue.add(jsArrayRequestUlt);
 
-                                }
-                            }
-                    ) ;
-                    jsArrayRequest.setTag("solicitud");
-                    requestQueue.add(jsArrayRequest);
+                    }catch (Exception e){
+                        Marca marca=new Marca(0);
+                        marca.save();
+                        List<Marca> lista = Marca.listAll(Marca.class);
+                        Log.d("ID","id="+lista.get(0).getId());
+                        codigo = lista.get(0).getCode();
+                    }
+
                 }
 
                 else{
+
                     //iniciar envio de solicitud por mensaje de texto
                     String tel="943434934";
                     String sms="REGISTRO INCIDENCIA  Codigo:"+cod_op+"  Fecha:"+fecha+
@@ -313,6 +365,7 @@ public class regincidencia extends Activity {
                     spinnerCat.setSelection(0);
                     lugar="Lab 1";
                     cat="Indeterminado";
+
                 }
             }
         });
@@ -322,6 +375,33 @@ public class regincidencia extends Activity {
         ///////////////////////////////////////////////////////////////////
 
 
+    }
+
+    private int parseJsonNum(JSONObject jsonObject) {
+        int ultSol=0;
+        JSONArray jsonArray=null;
+
+        try {
+            //obtener el array del objeto
+            jsonArray=jsonObject.getJSONArray("ultimo");
+            Log.d(TAG,"longitud ="+jsonArray.length());
+            for (int i=0;i<jsonArray.length();i++){
+
+                try{
+                    Log.d(TAG,"elementos "+jsonArray.length());
+                    JSONObject objeto=jsonArray.getJSONObject(i);
+                    ultSol=Integer.parseInt(objeto.getString("nult"));
+
+                }catch (JSONException e){
+                    Log.e(TAG,"Error de parsing: "+e.getMessage());
+                    ultSol=0;
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            ultSol=0;
+        }
+        return ultSol;
     }
 
     //////////////////METODOS PARA VERIFICAR CONEXION/////////////////////////////

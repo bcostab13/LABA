@@ -39,13 +39,18 @@ public class sincronizar extends Activity{
     EditText edituser,editpassword;
     int codigo=0;
     UsuarioGeneral user;
+
     //atributos de volley
     private String URL_BASE="http://helpdeskfisi20.esy.es";
     private static final String TAG="SincronizarUsuario";
     private String URL_JSON="/sincronizarUsuario.php?user=";
+    private String URL_JSON_ULT="/consultarNumSol.php?cc=";
+    private String direccion="";
+    private int ultSol;
     //agregamos el Administrador de Colas de Peticiones de Volley
     private RequestQueue requestQueue2;
     JsonObjectRequest jsArrayRequest2;
+    JsonObjectRequest jsArrayRequestUlt;
     UsuarioGeneral usaux;
 
     @Override
@@ -73,7 +78,7 @@ public class sincronizar extends Activity{
 
 
 
-
+        //al hacer clic en Ingresar
         botonIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,20 +100,19 @@ public class sincronizar extends Activity{
                                 nuevo.save();
                                 Toast.makeText(sincronizar.this,"Sincronización exitosa",Toast.LENGTH_LONG).show();
 
-                                //iniciar cuenta de incidencias
-                                Marca marca=new Marca(0);
-                                marca.save();
-                                List<Marca> lista = Marca.listAll(Marca.class);
-                                codigo = lista.get(0).getCode();
-
                                 //iniciar panel de control
                                 Bundle cod=new Bundle();
                                 cod.putInt("codigo",codigo);
+                                //enviando tipo de usuario
+                                String tip=user.getTipo();
+                                Bundle tipUs=new Bundle();
+                                tipUs.putString("tipo",tip);
 
-                                if(user.getTipo().equals("alumno")){
+                                if(user.getTipo().equals("alumno")||user.getTipo().equals("oficina")){
                                     Log.d("bundle1", "" + codigo);
                                     finish();
                                     Intent iniciarAlumno=new Intent(sincronizar.this,alumno.class).putExtras(cod).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    iniciarAlumno.putExtras(tipUs);
                                     startActivity(iniciarAlumno);
                                 }else if(user.getTipo().equals("administrador")){
                                     finish();
@@ -147,6 +151,32 @@ public class sincronizar extends Activity{
             UsuarioGeneral prueba=new UsuarioGeneral("US0000001","Brenda Costa","administrador");
             prueba.save();
         }
+    }
+
+    private int parseJsonNum(JSONObject jsonObject) {
+        JSONArray jsonArray=null;
+
+        try {
+            //obtener el array del objeto
+            jsonArray=jsonObject.getJSONArray("ultimo");
+            Log.d(TAG,"longitud ="+jsonArray.length());
+            for (int i=0;i<jsonArray.length();i++){
+
+                try{
+                    Log.d(TAG,"elementos "+jsonArray.length());
+                    JSONObject objeto=jsonArray.getJSONObject(i);
+                    ultSol=Integer.parseInt(objeto.getString("nult"));
+
+                }catch (JSONException e){
+                    Log.e(TAG,"Error de parsing: "+e.getMessage());
+                    ultSol=0;
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            ultSol=0;
+        }
+        return ultSol;
     }
 
     private UsuarioGeneral parseJson(JSONObject jsonObject) {

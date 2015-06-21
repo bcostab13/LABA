@@ -7,10 +7,18 @@ public class ResolverNombres {
     private String nombres[]={"Lab 1","Lab 2","Lab 3","Lab 4","Lab 5","Lab 6","Lab 7","Lab 8","Aula 101",
             "Aula 102","Aula 103","Aula 104","Aula 105","Aula 106","Aula 201","Aula 202","Aula 203",
             "Aula 204","Aula 205","Aula 206","Aula FAM1","Aula FAM2","Exteriores","Dentro de la Facultad",
-            "Fuera de la Facultad"};
+            "Fuera de la Facultad","Oficina de Economia","Tramite Documentario","Direccion Academica",
+            "CEUPS","Depart.Academico","USGOM","Oficina de Calidad Academica","Atencion al Docente",
+            "Biblioteca","Oficina de Publicaciones","Decanato","Unidad de Bienestar","Oficina de Matricula",
+            "Escuela de Ing.Sistemas","Escuela de Ing.Software"};
+
+
+
+
     private String trad[]={"LAB001","LAB002","LAB003","LAB004","LAB005","LAB006","LAB007","LAB008","AUL101",
             "AUL102","AUL103","AUL104","AUL105","AUL106","AUL201","AUL202","AUL203","AUL204","AUL205",
-            "AUL206","FAM001","FAM002","EXTERI","INTERN","EXTERI"};
+            "AUL206","FAM001","FAM002","EXTERI","INTERN","EXTERI","OFCECO","OFTRAD","OFDIAC","OFCEUP","OFDEAC",
+            "OFUSGO","OFCALA","OFATDO","BIBLIO","OFPUBL","OFDECA","OFBIEN","OFMATR","OFESIS","OFESSW"};
 
     public ResolverNombres(){
 

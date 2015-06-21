@@ -13,17 +13,22 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.Toast;
 
 /**
  * Created by Brenda on 20/04/2015.
  */
 public class alumno extends Activity{
     Button izquierdo,derecho,izquierdo2;
+    String tipoUs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alumno);
+
+        tipoUs=getIntent().getStringExtra("tipo");
+        Toast.makeText(this,"tipo="+tipoUs,Toast.LENGTH_LONG).show();
 
         //asociamos
         izquierdo=(Button)findViewById(R.id.buttonOpNIncidenciaA);
@@ -42,16 +47,19 @@ public class alumno extends Activity{
         derecho.startAnimation(mov_derecha);
 
         mov_izquierda.reset();
-        izquierdo2.startAnimation(mov_izquierda);
+        if(tipoUs.equals("oficina")){
+            izquierdo2.setVisibility(View.INVISIBLE);
+        }else {
+            izquierdo2.startAnimation(mov_izquierda);
+        }
 
         izquierdo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int cod_op=getIntent().getIntExtra("codigo",0);
-                Log.d("bundle1.5",""+cod_op);
-                Bundle cod=new Bundle();
-                cod.putInt("codigo",cod_op);
-                Intent lanzar_registro=new Intent(alumno.this,regincidenciaA.class).putExtras(cod).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Log.d("Paso de parametro: tipo=",""+tipoUs);
+                Bundle tipo=new Bundle();
+                tipo.putString("tipo",tipoUs);
+                Intent lanzar_registro=new Intent(alumno.this,regincidenciaA.class).putExtras(tipo).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(lanzar_registro);
             }
         });

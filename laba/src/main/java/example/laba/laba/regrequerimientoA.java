@@ -30,10 +30,16 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.parse.ParseInstallation;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -64,6 +70,10 @@ public class regrequerimientoA extends Activity {
     StringRequest jsArrayRequest2;
     String direccion;
 
+    private String URL_JSON_ULT="/consultarNumSol.php?cc=";
+    JsonObjectRequest jsArrayRequestUlt;
+
+
     //atributos de la interfaz
     Button bEnviar;
     ImageButton bFecha;
@@ -73,7 +83,12 @@ public class regrequerimientoA extends Activity {
     int cod_op2=0,codigo;
     String cod_op,codInc;
     UsuarioGeneral user;
-    String fecha,descripcion,coddeuser;
+    String fecha,descripcion,usuarioE;
+
+    //peticion ubicacion
+    private String URL_JSON_UB="/consultarUbicacion.php";
+    private String ubi;
+    JsonObjectRequest jsArrayRequest3;
 
     //atributos del date dialog
     int mDay,mMonth,mYear,sDay,sMon,sYear;
@@ -123,33 +138,79 @@ public class regrequerimientoA extends Activity {
         ///////////////////////////////////////////////////////////////////
 
         /////////////////SETEO DE SPINNER LUGAR////////////////////////////
-        //declaramos un array con las opciones
-
         //declaramos un adapter para usar un array generico de java
-        ArrayAdapter<CharSequence> adaptadorLug = ArrayAdapter.createFromResource(this,
-                R.array.lugaresreq, android.R.layout.simple_spinner_item);
+        if(user.getTipo().equals("oficina")) {
+            //iniciar envio de solicitud a BD
+            //ingresamos datos de requerimiento
+            direccion = URL_BASE + URL_JSON_UB + "?cc=" + user.getCodigo();
+            direccion = direccion.replace(" ", "%20");
+            direccion = direccion.replace("í", "i");
+            direccion = direccion.replace("á", "a");
+            direccion = direccion.replace("é", "e");
+            direccion = direccion.replace("ó", "o");
+            direccion = direccion.replace("ú", "u");
+            Log.d("Direccion", direccion);
 
-        //enlazamos el spinner
-        adaptadorLug.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerLug.setAdapter(adaptadorLug);
+            //ingresamos la solicitud
+            jsArrayRequest3 = new JsonObjectRequest(
+                    Request.Method.GET,
+                    direccion,
+                    null,
+                    new Response.Listener<JSONObject>() {
 
-        //activamos los eventos
-        //OnItemSelected=cuando se hace click
-        //onNothingSelected=lo que pasa cuando no seleccionas nada
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.d(TAG, "RESPUESTA=" + response);
+                            ubi = parseJson(response);
+                            ArrayList<String> ubicacion = new ArrayList<String>();
+                            ubicacion.add(ubi);
+                            //Creamos el adaptador
+                            ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(regrequerimientoA.this, android.R.layout.simple_spinner_item, ubicacion);
+                            //Añadimos el layout para el menú y se lo damos al spinner
+                            spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinnerLug.setAdapter(spinner_adapter);
+                            lugar=ubi;
+                        }
+                    },
+                    new Response.ErrorListener() {
 
-        final String[] losLugares=getResources().getStringArray(R.array.lugaresreq);
-        spinnerLug.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener(){
-                    //cuando hago clic en uno
-                    public void onItemSelected(AdapterView<?> parent,
-                                               android.view.View v,int position, long id){
-                        lugar=losLugares[position];
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
                     }
-                    public void onNothingSelected(AdapterView<?> parent){
+            );
 
+            requestQueue.add(jsArrayRequest3);
+        }else {
+
+
+            ArrayAdapter<CharSequence> adaptadorLug = ArrayAdapter.createFromResource(this,
+                    R.array.lugaresAlumno, android.R.layout.simple_spinner_item);
+
+            //enlazamos el spinner
+            adaptadorLug.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerLug.setAdapter(adaptadorLug);
+
+            //activamos los eventos
+            //OnItemSelected=cuando se hace click
+            //onNothingSelected=lo que pasa cuando no seleccionas nada
+
+            final String[] losLugares=getResources().getStringArray(R.array.lugaresAlumno);
+            spinnerLug.setOnItemSelectedListener(
+                    new AdapterView.OnItemSelectedListener(){
+                        //cuando hago clic en uno
+                        public void onItemSelected(AdapterView<?> parent,
+                                                   android.view.View v,int position, long id){
+                            lugar=losLugares[position];
+                        }
+                        public void onNothingSelected(AdapterView<?> parent){
+
+                        }
                     }
-                }
-        );
+            );
+
+        }
 
         ///////////////////////////////////////////////////////////////////
 
@@ -251,6 +312,7 @@ public class regrequerimientoA extends Activity {
                     List<Marca> lista = Marca.listAll(Marca.class);
                     //Tag.deleteAll(Tag.class);
                     codigo = lista.get(0).getCode();
+
                 }catch (Exception e){
                     Marca marca=new Marca(0);
                     marca.save();
@@ -258,66 +320,97 @@ public class regrequerimientoA extends Activity {
                     Log.d("ID","id="+lista.get(0).getId());
                     codigo = lista.get(0).getCode();
                 }
-                Log.d("Codigo", "elemento=" + codigo);
-                cod_op=""+codigo;
-                for (int i=0;i<4-String.valueOf(codigo).length();i++){
-                    cod_op="0"+cod_op;
-                }
-                Log.d("Codigo","cod_op="+cod_op);
-                ResolverNombres rn = new ResolverNombres();
-                lugar = rn.getTrad(lugar);
-                descripcion = textDesc.getText().toString();
-                final String usuarioE = user.getCodigo();
-                codInc = "R" + usuarioE.substring(5) + cod_op;
 
                 if (conexionInternet()) {
 
+                    //obtenemos el numero de la ultima solicitud del usuario
+                    direccion = URL_BASE + URL_JSON_ULT + user.getCodigo();
+                    direccion = direccion.replace(" ", "%20");
+                    direccion = direccion.replace("í", "i");
+                    direccion = direccion.replace("á", "a");
+                    direccion = direccion.replace("é", "e");
+                    direccion = direccion.replace("ó", "o");
+                    direccion = direccion.replace("ú", "u");
+                    Log.d("Direccion", direccion);
 
-                    //ingresamos datos de requerimiento
-                    Log.d("Direccion",URL_BASE + URL_JSON_REQ+"?codsol="+codInc+"&fecreg="+fecha
-                            +"&desc="+descripcion+"&im="+"/img/aus_software.jpg"+"&codub="
-                            +lugar+"&codus="+usuarioE);
-                    direccion=URL_BASE + URL_JSON_REQ+"?codsol="+codInc+"&fecreg="+fecha
-                            +"&desc="+descripcion+"&im="+"/img/aus_software.jpg"+"&codub="
-                            +lugar+"&codus="+usuarioE+"&fechali="+fechaLi+"&categ="+cat+"&id="+
-                            ParseInstallation.getCurrentInstallation().get("deviceToken");
-                    direccion=direccion.replace(" ","%20");
-                    direccion=direccion.replace("í","i");
-                    direccion=direccion.replace("á","a");
-                    direccion=direccion.replace("é","e");
-                    direccion=direccion.replace("ó","o");
-                    direccion=direccion.replace("ú","u");
-
-                    jsArrayRequest2 = new StringRequest(
+                    jsArrayRequestUlt = new JsonObjectRequest(
                             Request.Method.GET,
                             direccion,
-                            new Response.Listener<String>() {
+                            null,
+                            new Response.Listener<JSONObject>() {
 
                                 @Override
-                                public void onResponse(String response) {
-                                    Toast.makeText(regrequerimientoA.this, "Requerimiento Registrado", Toast.LENGTH_LONG).show();
-                                    textDesc.setText("");
-                                    lugar="Dentro de la Facultad";
-                                    cat="Instalación de Software";
-                                    spinnerCat.setSelection(0);
-                                    spinnerLug.setSelection(0);
-                                    //actualizamos el indice
-                                    Marca cont = Marca.findById(Marca.class, (long) 1);
-                                    cont.setCode(cont.getCode()+1);
-                                    cont.save(); // updates the previous entry with new values.
+                                public void onResponse(JSONObject response) {
+
+                                    Log.d("Codigo", "elemento=" + codigo);
+                                    cod_op=""+codigo;
+                                    for (int i=0;i<4-String.valueOf(codigo).length();i++){
+                                        cod_op="0"+cod_op;
+                                    }
+                                    Log.d("Codigo","cod_op="+cod_op);
+                                    ResolverNombres rn = new ResolverNombres();
+                                    lugar = rn.getTrad(lugar);
+                                    descripcion = textDesc.getText().toString();
+                                    usuarioE = user.getCodigo();
+                                    codInc = "R" + usuarioE.substring(5) + cod_op;
+
+                                    //ingresamos datos de requerimiento
+                                    Log.d("Direccion",URL_BASE + URL_JSON_REQ+"?codsol="+codInc+"&fecreg="+fecha
+                                            +"&desc="+descripcion+"&im="+"/img/aus_software.jpg"+"&codub="
+                                            +lugar+"&codus="+usuarioE);
+                                    direccion=URL_BASE + URL_JSON_REQ+"?codsol="+codInc+"&fecreg="+fecha
+                                            +"&desc="+descripcion+"&im="+"/img/aus_software.jpg"+"&codub="
+                                            +lugar+"&codus="+usuarioE+"&fechali="+fechaLi+"&categ="+cat+"&id="+
+                                            ParseInstallation.getCurrentInstallation().get("deviceToken");
+                                    direccion=direccion.replace(" ","%20");
+                                    direccion=direccion.replace("í","i");
+                                    direccion=direccion.replace("á","a");
+                                    direccion=direccion.replace("é","e");
+                                    direccion=direccion.replace("ó","o");
+                                    direccion=direccion.replace("ú","u");
+
+                                    jsArrayRequest2 = new StringRequest(
+                                            Request.Method.GET,
+                                            direccion,
+                                            new Response.Listener<String>() {
+
+                                                @Override
+                                                public void onResponse(String response) {
+                                                    Toast.makeText(regrequerimientoA.this, "Requerimiento Registrado", Toast.LENGTH_LONG).show();
+                                                    textDesc.setText("");
+                                                    lugar="Dentro de la Facultad";
+                                                    cat="Instalación de Software";
+                                                    spinnerCat.setSelection(0);
+                                                    spinnerLug.setSelection(0);
+                                                    //actualizamos el indice
+                                                    Marca cont = Marca.findById(Marca.class, (long) 1);
+                                                    cont.setCode(cont.getCode()+1);
+                                                    cont.save(); // updates the previous entry with new values.
+                                                }
+                                            },
+                                            new Response.ErrorListener() {
+
+                                                @Override
+                                                public void onErrorResponse(VolleyError error) {
+
+                                                }
+                                            }
+                                    );
+                                    jsArrayRequest2.setTag("solicitud");
+                                    requestQueue.add(jsArrayRequest2);
+
                                 }
                             },
                             new Response.ErrorListener() {
 
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
 
+                                    }
                                 }
-                            }
-                    );
-                    jsArrayRequest2.setTag("solicitud");
-                    requestQueue.add(jsArrayRequest2);
+                            );
 
+                    requestQueue.add(jsArrayRequestUlt);
 
                 }
 
@@ -343,6 +436,33 @@ public class regrequerimientoA extends Activity {
 
 
         ///////////////////////////////////////////////////////////////////
+    }
+
+    private String parseJson(JSONObject response) {
+        JSONArray jsonArray=null;
+        String ubic="";
+
+        try {
+            //obtener el array del objeto
+            jsonArray=response.getJSONArray("ubicacion");
+            Log.d(TAG,"longitud ="+jsonArray.length());
+            for (int i=0;i<jsonArray.length();i++){
+
+                try{
+                    Log.d(TAG,"elementos "+jsonArray.length());
+                    JSONObject objeto=jsonArray.getJSONObject(i);
+                    ubic=objeto.getString("ubicacion");
+
+                }catch (JSONException e){
+                    Log.e(TAG,"Error de parsing: "+e.getMessage());
+                    ubic="Indeterminado";
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d(TAG,"Ubicacion del usuario: "+ubic);
+        return ubic;
     }
 
     //////////////////METODOS PARA VERIFICAR CONEXION/////////////////////////////

@@ -81,10 +81,16 @@ public class bienvenido extends Activity{
                 Bundle cod=new Bundle();
                 cod.putInt("codigo",codigo);
 
-                if(usuarioActual.getTipo().equals("alumno")){
+                //enviando tipo de usuario
+                String tip=usuarioActual.getTipo();
+                Bundle tipUs=new Bundle();
+                tipUs.putString("tipo",tip);
+
+                if(usuarioActual.getTipo().equals("alumno")||usuarioActual.getTipo().equals("oficina")){
                     Log.d("bundle1", "" + codigo);
                     finish();
                     Intent iniciarAlumno=new Intent(bienvenido.this,alumno.class).putExtras(cod).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    iniciarAlumno.putExtras(tipUs);
                     startActivity(iniciarAlumno);
                 }else if(usuarioActual.getTipo().equals("administrador")){
                     finish();
