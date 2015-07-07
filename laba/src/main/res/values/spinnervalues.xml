@@ -78,5 +78,79 @@
         <item>Fuera de la Facultad</item>
     </string-array>
 
+    <!--array de dispositivos-->
+    <string-array name="dispositivos">
+        <item>Mouse</item>
+        <item>Teclado</item>
+        <item>CPU</item>
+        <item>Monitor</item>
+        <item>Impresora</item>
+        <item>Proyector</item>
+        <item>Escaner</item>
+        <item>Multfuncional</item>
+    </string-array>
 
+    <!--array de dispositivos-->
+    <string-array name="enciende">
+        <item>Si</item>
+        <item>No</item>
+        <item>Irrelevante</item>
+    </string-array>
+
+    <!--array de dispositivos-->
+    <string-array name="funcmal">
+        <item>Si</item>
+        <item>No</item>
+        <item>Irrelevante</item>
+    </string-array>
+
+    <!--array de conexion cables-->
+    <string-array name="concables">
+        <item>Conectados</item>
+        <item>Desconectados</item>
+        <item>Irrelevante</item>
+    </string-array>
+
+    <!--array de visualizacion de redes-->
+    <string-array name="visredes">
+        <item>No veo ninguna red</item>
+        <item>Veo solamente una red</item>
+        <item>Veo todas las redes</item>
+        <item>Irrelevante</item>
+    </string-array>
+
+    <!--array de tipo de conexion-->
+    <string-array name="tipored">
+        <item>Ethernet</item>
+        <item>Wi-Fi</item>
+        <item>Irrelevante</item>
+    </string-array>
+
+    <!--array de Tipo-->
+    <string-array name="tipo">
+        <item>Desempeño</item>
+        <item>Inestabilidad</item>
+        <item>Reseteo</item>
+    </string-array>
+
+    <!--array de Memoria Llena-->
+    <string-array name="memoria">
+        <item>Si</item>
+        <item>No</item>
+    </string-array>
+
+    <!--array asociado a-->
+    <string-array name="asociadoa">
+        <item>Inicio de Sesión del Sistema</item>
+        <item>Inicio de Sesión de Aplicación</item>
+        <item>Uso General del Sistema</item>
+        <item>Uso de Aplicación o Dispositivo</item>
+    </string-array>
+
+    <!--array de problema-->
+    <string-array name="problema">
+        <item>Desconocer Procedimiento</item>
+        <item>Desconocer Método de Ingreso</item>
+        <item>Desconocer Lo que Debe Ingresar</item>
+    </string-array>
 </resources>

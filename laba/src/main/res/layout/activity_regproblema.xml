@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondomain">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:background="#FFFFFF"
+        android:alpha="0.9"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="40dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registro de Problema"
+            android:id="@+id/textViewRegProbl"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="15dp"
+            android:background="#000000"
+            android:padding="4dp"
+            android:textColor="#FFFFFF"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/textViewIndRegProbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A continuación seleccione una categoría:"
+            android:layout_below="@+id/textViewRegProbl"
+            android:layout_alignLeft="@+id/textViewRegProbl"
+            android:layout_alignStart="@+id/textViewRegProbl"
+            android:layout_marginTop="5dp"
+            android:textSize="16dp"/>
+
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/textViewIndRegProbl"
+            android:layout_centerVertical="true">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/formimg">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewControlP"
+                    android:src="@drawable/gestiondeproblemas"/>
+
+                </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/formSelectCategoria"
+                android:layout_below="@+id/formimg"
+                android:gravity="center"
+                android:layout_marginTop="10dp">
+
+                <Button
+                    android:background="@drawable/botonpulsado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonSelectCat"
+                    android:text="Seleccionar Categoría"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    />
+
+                </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/form3"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/formSelectCategoria"
+                android:layout_marginTop="15dp"
+                android:weightSum="1"
+                android:gravity="center"
+                >
+
+                <TextView
+                    style="@style/TextoSugerido"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Categoria:"
+                    android:layout_weight="0.3"
+
+                    />
+
+                <EditText
+                    android:id="@+id/editCateg"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.65"
+                    android:hint="No ha elegido categoría"
+                    android:textSize="15dp"
+                    android:editable="false"
+                    android:enabled="true"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/form6"
+                android:orientation="horizontal"
+                android:paddingTop="5dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/form3"
+                android:layout_marginTop="20dp"
+                android:weightSum="1"
+                android:gravity="center">
+
+                <Button
+                    style="@style/BotonOperacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Siguiente"
+                    android:id="@+id/buttonSiguiente"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="2dp"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

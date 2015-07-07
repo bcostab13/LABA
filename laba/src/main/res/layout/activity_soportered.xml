@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondomain">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:background="#FFFFFF"
+        android:alpha="0.9"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="40dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registro de Problema"
+            android:id="@+id/textViewSopUs"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="15dp"
+            android:background="#000000"
+            android:padding="4dp"
+            android:textColor="#FFFFFF"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/textViewIndSopUs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Complete los datos del formulario:"
+            android:layout_below="@+id/textViewSopUs"
+            android:layout_alignLeft="@+id/textViewSopUs"
+            android:layout_alignStart="@+id/textViewSopUs"
+            android:layout_marginTop="5dp"
+            android:textSize="16dp"/>
+
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/textViewIndSopUs"
+            android:layout_centerVertical="true">
+
+            <LinearLayout
+                android:id="@+id/formIni"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:weightSum="1"
+                android:gravity="center"
+                >
+
+                <EditText
+                    android:id="@+id/EditTextNomPro"
+                    android:layout_width="0dp"
+                    android:layout_weight=".95"
+                    android:layout_height="100dp"
+                    android:inputType="textMultiLine"
+                    android:hint="Nombre del Problema"
+                    android:textSize="18dp"
+                    android:gravity="left|top"
+                    android:maxLength="200"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/form2"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_below="@+id/formIni"
+                android:weightSum="1"
+                android:gravity="center"
+                >
+
+                <TextView
+                    style="@style/TextoSugerido"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:text="Estado de Cables:"
+
+                    />
+                <Spinner
+                    android:id="@+id/spinnerCables"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.65"></Spinner>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/form4"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/form2"
+                android:layout_marginTop="0dp"
+                android:weightSum="1"
+                android:gravity="center"
+                >
+
+                <TextView
+                    style="@style/TextoSugerido"
+                    android:id="@+id/textViewVisualiza"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:text="¿Visualiza redes?"
+
+                    />
+
+                <Spinner
+                    android:id="@+id/spinnerVisualiza"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.65">
+                </Spinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/form4B"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/form4"
+                android:layout_marginTop="0dp"
+                android:weightSum="1"
+                android:gravity="center"
+                >
+
+                <TextView
+                    style="@style/TextoSugerido"
+                    android:id="@+id/textViewTipo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:text="Tipo de Conexión:"
+
+                    />
+
+                <Spinner
+                    android:id="@+id/spinnerFunciona"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.65">
+                </Spinner>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/form5"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/form4B"
+                android:layout_marginTop="0dp"
+                android:weightSum="1"
+                android:gravity="center"
+                >
+
+                <EditText
+                    android:id="@+id/detalle"
+                    android:layout_width="0dp"
+                    android:layout_weight=".95"
+                    android:layout_height="100dp"
+                    android:inputType="textMultiLine"
+                    android:hint="Detalle"
+                    android:textSize="15dp"
+                    android:gravity="left|top"
+                    android:maxLength="200"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/form6"
+                android:orientation="horizontal"
+                android:paddingTop="5dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/form5"
+                android:layout_marginTop="0dp"
+                android:weightSum="1"
+                android:gravity="center">
+
+                <Button
+                    style="@style/BotonOperacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Registrar"
+                    android:id="@+id/buttonRegistrar"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="2dp"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

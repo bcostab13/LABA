@@ -193,6 +193,61 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="example.laba.laba.regproblema"
+            android:label="REGISTRAR PROBLEMA"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.REGPROBLEMA" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="example.laba.laba.soporteusuario"
+            android:label="SOPORTE DE USUARIO"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.SOPORTEUSUARIO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="example.laba.laba.soportesoftware"
+            android:label="SOPORTE DE SOFTWARE"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.SOPORTESOFTWARE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="example.laba.laba.soportered"
+            android:label="SOPORTE DE RED"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.SOPORTERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="example.laba.laba.soportehardware"
+            android:label="SOPORTE DE HARDWARE"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.SOPORTEHARDWARE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
 
         <meta-data android:name="DATABASE" android:value="sugar_example.db" />
         <meta-data android:name="VERSION" android:value="2" />

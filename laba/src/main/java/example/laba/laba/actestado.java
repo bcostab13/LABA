@@ -1,9 +1,13 @@
 package example.laba.laba;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -28,6 +32,7 @@ public class actestado extends Activity{
     private Button buttonModEsta;
     private int estadoN=1;
     private String cod,est;
+    private boolean sw=false;
     //atributos de volley
     //atributos
     private String URL_BASE="http://helpdeskfisi20.esy.es";
@@ -65,12 +70,15 @@ public class actestado extends Activity{
                 switch (i){
                     case R.id.rbatendiendo:
                         estadoN=1;
+                        sw=false;
                         break;
                     case R.id.rbfinalizado:
                         estadoN=2;
+                        sw=true;
                         break;
                     case R.id.rbcancelado:
                         estadoN=3;
+                        sw=false;
                         break;
                 }
                 Log.d("Nuevo Estado",""+estadoN);
@@ -89,7 +97,7 @@ public class actestado extends Activity{
                             @Override
                             public void onResponse(String response) {
                                 Toast.makeText(actestado.this,"Estado Actualizado",Toast.LENGTH_LONG).show();
-                                finish();
+                                //finish();
                             }
                         },
                         new Response.ErrorListener() {
@@ -109,7 +117,7 @@ public class actestado extends Activity{
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                Toast.makeText(actestado.this,"ID="+response,Toast.LENGTH_LONG).show();
+                                //Toast.makeText(actestado.this,"ID="+response,Toast.LENGTH_LONG).show();
                                 // Create our Installation query
                                 ParseQuery pushQuery = ParseInstallation.getQuery();
                                 pushQuery.whereEqualTo("deviceToken",response);
@@ -117,8 +125,18 @@ public class actestado extends Activity{
                                 // Send push notification to query
                                 ParsePush push = new ParsePush();
                                 push.setQuery(pushQuery); // Set our Installation query
-                                push.setMessage("Tu solicitud será atendida en los próximos minutos.");
+                                switch(estadoN){
+                                    case 1: push.setMessage("Su solicitud será atendida en los próximos minutos.");
+                                        break;
+                                    case 2: push.setMessage("Su solicitud fue atendida satisfactoriamente. " +
+                                            "Gracias por confiar en nosotros :)");
+                                        break;
+                                    case 3: push.setMessage("Su solicitud ha sido rechazada.");
+                                        break;
+                                }
+
                                 push.sendInBackground();
+
                             }
                         },
                         new Response.ErrorListener() {
@@ -130,6 +148,30 @@ public class actestado extends Activity{
                 );
 
                 requestQueue2.add(StringRequestID);
+
+                if (estadoN==2){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(actestado.this);
+                    builder.setMessage("¿Desea registrar este problema como recurrente?")
+                            .setTitle("Registrar Problema")
+                            .setCancelable(false)
+                            .setNegativeButton("No",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    })
+                            .setPositiveButton("Si",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            //finish();
+                                            Intent lanzar_regproblema=new Intent(actestado.this,regproblema.class);
+                                            startActivity(lanzar_regproblema);
+                                        }
+                                    });
+                    AlertDialog alert = builder.create();
+                    alert.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+                    alert.show();
+                }
 
             }
         });
