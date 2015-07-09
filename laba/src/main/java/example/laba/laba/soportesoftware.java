@@ -114,12 +114,13 @@ public class soportesoftware extends Activity{
             public void onClick(View view) {
                 det = txDetalle.getText().toString();
                 nompro=txNomProblema.getText().toString();
+                tipo=spTipo.getSelectedItem().toString();
                 //enviar petición con volley
-                if(tipo=="Desempeño"){
+                if(tipo.equals("Desempeño")){
                     des="Si";ines="No";res="No";
-                }else if(tipo=="Inestabilidad"){
+                }else if(tipo.equals("Inestabilidad")){
                     des="No";ines="Si";res="No";
-                }else if(tipo=="Reseteo"){
+                }else if(tipo.equals("Reseteo")){
                     des="No";ines="No";res="Si";
                 }
                 if (conexionInternet()) {

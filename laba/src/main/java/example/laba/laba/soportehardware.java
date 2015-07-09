@@ -30,6 +30,7 @@ public class soportehardware extends Activity {
     Button btRegistrar;
     String disp, enc, funmal, det,nompro;
 
+
     //atributos de volley
     //atributos
     private String URL_BASE = "http://helpdeskfisi20.esy.es";

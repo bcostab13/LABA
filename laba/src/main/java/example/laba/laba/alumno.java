@@ -39,7 +39,7 @@ public class alumno extends Activity{
         Animation mov_izquierda;
         mov_izquierda= AnimationUtils.loadAnimation(this, R.animator.ladoizquierdo);
         mov_izquierda.reset();
-        izquierdo.startAnimation(mov_izquierda);
+        //izquierdo.startAnimation(mov_izquierda);
 
         Animation mov_derecha;
         mov_derecha= AnimationUtils.loadAnimation(this,R.animator.ladoderecho);
@@ -51,6 +51,12 @@ public class alumno extends Activity{
             izquierdo2.setVisibility(View.INVISIBLE);
         }else {
             izquierdo2.startAnimation(mov_izquierda);
+        }
+
+        if(tipoUs.equals("externo")){
+            izquierdo.setVisibility(View.INVISIBLE);
+        }else {
+            izquierdo.startAnimation(mov_izquierda);
         }
 
         izquierdo.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +79,17 @@ public class alumno extends Activity{
                 cod.putInt("codigo",cod_op);
                 Intent lanzar_registro=new Intent(alumno.this,regrequerimientoA.class).putExtras(cod).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(lanzar_registro);
+            }
+        });
+
+        izquierdo2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Bundle cod=new Bundle();
+                cod.putString("usuario","alumno");
+                Intent lanzar_diagnostico=new Intent(alumno.this,gestionproblemas.class).putExtras(cod).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(lanzar_diagnostico);
             }
         });
     }

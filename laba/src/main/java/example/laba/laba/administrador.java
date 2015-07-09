@@ -18,7 +18,7 @@ import android.widget.Button;
  * Created by Brenda on 20/04/2015.
  */
 public class administrador extends Activity{
-    Button izquierdo,derecho,izquierdo2;
+    Button izquierdo,derecho,izquierdo2,derecho2;
     int cod_cont=0;
 
     @Override
@@ -30,6 +30,7 @@ public class administrador extends Activity{
         izquierdo=(Button)findViewById(R.id.buttonOpNIncidencia);
         derecho=(Button)findViewById(R.id.buttonOpContSolicitud);
         izquierdo2=(Button)findViewById(R.id.buttonOpContLabo);
+        derecho2=(Button)findViewById(R.id.buttonOpContProblemas);
         cod_cont=getIntent().getIntExtra("codigo",0);
         Log.d("Bundle","Bundle admi="+cod_cont);
 
@@ -46,6 +47,10 @@ public class administrador extends Activity{
         mov_izquierda= AnimationUtils.loadAnimation(this, R.animator.ladoizquierdo);
         mov_izquierda.reset();
         izquierdo2.startAnimation(mov_izquierda);
+
+        mov_derecha= AnimationUtils.loadAnimation(this,R.animator.ladoderecho);
+        mov_derecha.reset();
+        derecho2.startAnimation(mov_derecha);
 
         izquierdo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +89,13 @@ public class administrador extends Activity{
             }
         });
 
-
+        derecho2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent lanzar_problema=new Intent(administrador.this,gestionproblemas.class);
+                startActivity(lanzar_problema);
+            }
+        });
     }
 
     @Override

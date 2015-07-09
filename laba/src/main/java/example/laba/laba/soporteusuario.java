@@ -118,28 +118,28 @@ public class soporteusuario extends Activity{
                 appOdisp=txApp.getText().toString();
 
                 //enviar petición con volley
-                if(asociadoa=="Inicio de Sesión del Sistema"){
+                if(asociadoa.equals("Inicio de Sesión del Sistema")){
                     iniciSesSist="Si";iniciSesAplic="No";usoGenSis="No";usoApliDisp="No";
-                }else if(asociadoa=="Inicio de Sesión de Aplicación"){
+                }else if(asociadoa.equals("Inicio de Sesión de Aplicación")){
                     iniciSesSist="No";iniciSesAplic="Si";usoGenSis="No";usoApliDisp="No";
-                }else if(asociadoa=="Uso General del Sistema"){
+                }else if(asociadoa.equals("Uso General del Sistema")){
                     iniciSesSist="No";iniciSesAplic="No";usoGenSis="Si";usoApliDisp="No";
-                }else if(asociadoa=="Uso de Aplicación o Dispositivo"){
+                }else if(asociadoa.equals("Uso de Aplicación o Dispositivo")){
                     iniciSesSist="No";iniciSesAplic="No";usoGenSis="No";usoApliDisp="Si";
                 }
 
-                if (problema=="Desconocer Procedimiento"){
+                if (problema.equals("Desconocer Procedimiento")){
                     descProc="Si";descMet="No";descLoQueIng="No";
-                }else if(problema=="Desconocer Método de Ingreso"){
+                }else if(problema.equals("Desconocer Método de Ingreso")){
                     descProc="No";descMet="Si";descLoQueIng="No";
-                }else if(problema=="Desconocer Lo que Debe Ingresar"){
+                }else if(problema.equals("Desconocer Lo que Debe Ingresar")){
                     descProc="No";descMet="No";descLoQueIng="Si";
                 }
 
                 if (conexionInternet()) {
 
                     direccion = URL_BASE + URL_JSON_INC + "?np="+nompro+"&iss="+iniciSesSist+
-                            "&isa="+iniciSesAplic+"&ugs="+usoGenSis+"&uad="+usoApliDisp+"&dp+"+descProc+
+                            "&isa="+iniciSesAplic+"&ugs="+usoGenSis+"&uad="+usoApliDisp+"&dp="+descProc+
                             "&dm="+descMet+"&dlq="+descLoQueIng+"&aod="+appOdisp+
                             "&det="+det+"&sol=";
 
