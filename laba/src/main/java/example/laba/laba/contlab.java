@@ -40,6 +40,10 @@ public class contlab extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contlab);
 
+        ubicacion=getIntent().getStringExtra("ub");
+        //Toast.makeText(this,"ub=" + ubicacion, Toast.LENGTH_LONG).show();
+
+
         //asociamos los elementos
         posiciones=new TextView[14][2];
         posiciones[0][0]=(TextView)findViewById(R.id.curso0809a);

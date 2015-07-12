@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.Toast;
 
 /**
  * Created by Brenda on 20/04/2015.
@@ -74,12 +75,36 @@ public class administrador extends Activity{
         izquierdo2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final CharSequence[] items = {"Android OS", "iOS", "Windows Phone", "Meego"};
+                final CharSequence[] items = {"Lab 1", "Lab 2", "Lab 3", "Lab 4","Lab 5","Lab 6","Lab 7",
+                "Lab 8"};
                 AlertDialog.Builder builder = new AlertDialog.Builder(administrador.this);
-                builder.setTitle("Tu OS móvil preferido?");
+                builder.setTitle("Seleccionar Laboratorio");
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
+                        String ubic="";
+                        switch (item){
+                            case 0: ubic="LAB001";
+                                break;
+                            case 1: ubic="LAB002";
+                                break;
+                            case 2: ubic="LAB003";
+                                break;
+                            case 3: ubic="LAB004";
+                                break;
+                            case 4: ubic="LAB005";
+                                break;
+                            case 5: ubic="LAB006";
+                                break;
+                            case 6: ubic="LAB007";
+                                break;
+                            case 7: ubic="LAB008";
+                                break;
+                        }
+                        Bundle ubicacion=new Bundle();
+                        ubicacion.putString("ub", ubic);
                         Intent lanzar_contlab=new Intent(administrador.this,contlab.class);
+                        lanzar_contlab.putExtras(ubicacion);
+                        lanzar_contlab.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(lanzar_contlab);
                         dialog.cancel();
                     }

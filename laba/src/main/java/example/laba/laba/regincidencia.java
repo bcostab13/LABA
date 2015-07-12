@@ -5,6 +5,7 @@ package example.laba.laba;
  */
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -16,6 +17,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.text.format.Time;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -107,10 +109,10 @@ public class regincidencia extends Activity {
         int hora=today.hour;
         int minutos=today.minute;
         mes=mes+1;
-        String mesS=hora<10?"0"+mes:""+mes;
+        String mesS=mes<10?"0"+mes:""+mes;
         String diaS=dia<10?"0"+dia:""+dia;
         textFecha.setText(diaS+"/"+mesS+"/"+anio+" "+today.format("%k:%M:%S"));
-        fecha=textFecha.getText().toString();
+        fecha=anio+"-"+mesS+"-"+diaS+" "+today.format("%k:%M:%S");
         ///////////////////////////////////////////////////////////////////
 
         /////////////////SETEO DE SPINNER LUGAR////////////////////////////
@@ -236,6 +238,16 @@ public class regincidencia extends Activity {
             public void onClick(View view) {
                 if (conexionInternet()) {
 
+                    //mostrar progreso
+                    LayoutInflater inflater = getLayoutInflater();
+
+                    View dialoglayout = inflater.inflate(R.layout.dialog_cargando, null);
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(regincidencia.this);
+                    builder.setView(dialoglayout);
+                    //builder.show();
+                    final AlertDialog dialog=builder.create();
+                    dialog.show();
+
                     try {
 
                         List<Marca> lista = Marca.listAll(Marca.class);
@@ -304,6 +316,7 @@ public class regincidencia extends Activity {
                                                     @Override
                                                     public void onResponse(String response) {
                                                         Toast.makeText(regincidencia.this,"Incidencia Registrada",Toast.LENGTH_LONG).show();
+                                                        dialog.cancel();
                                                         textDesc.setText("");
                                                         spinnerLug.setSelection(0);
                                                         spinnerCat.setSelection(0);

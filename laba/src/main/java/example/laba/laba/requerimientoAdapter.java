@@ -1,7 +1,6 @@
 package example.laba.laba;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -154,29 +152,7 @@ public class requerimientoAdapter extends ArrayAdapter{
         }
         ratingDificultad.setRating(estrellas);
 
-        //Peticion para obtener la imagen
-        ImageRequest request=new ImageRequest(
-                URL_BASE+item.getImagen(),
-                new Response.Listener<Bitmap>(){
-
-                    @Override
-                    public void onResponse(Bitmap response) {
-                        imagenPost.setImageBitmap(response);
-                    }
-                },0,0,null,null,
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        imagenPost.setImageResource(R.drawable.error);
-                        Log.d(TAG,"Error en respuesta de Bitmap:"+error.getMessage());
-                    }
-                }
-        );
-
-        //añadimos peticion a la cola
-        requestQueue.add(request);
-
-
+        imagenPost.setImageResource(R.drawable.requeri);
 
         return listItemView;
 

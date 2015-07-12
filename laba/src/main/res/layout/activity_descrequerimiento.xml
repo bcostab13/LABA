@@ -74,6 +74,7 @@
                         android:text="Código:"
                         android:textColor="#fff"
                         android:textStyle="bold"
+                        android:padding="2dp"
                         android:background="#3B0B0B"/>
 
                     <TextView
@@ -105,7 +106,8 @@
                         android:text="F.Registro:"
                         android:textColor="#fff"
                         android:textStyle="bold"
-                        android:background="#DF0101"/>
+                        android:padding="2dp"
+                        android:background="#820101"/>
 
                     <TextView
                         android:id="@+id/textViewValTiempoRequer"
@@ -133,7 +135,10 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
                         android:text="F.Límite:"
+                        android:textColor="#fff"
                         android:textStyle="bold"
+                        android:padding="2dp"
+                        android:background="#DF0101"
                     />
 
                     <TextView
@@ -165,6 +170,7 @@
                         android:text="Categoria:"
                         android:textColor="#fff"
                         android:textStyle="bold"
+                        android:padding="2dp"
                         android:background="#DF3A01"/>
 
                     <TextView
@@ -195,6 +201,7 @@
                         android:text="Lugar:"
                         android:textColor="#111111"
                         android:textStyle="bold"
+                        android:padding="2dp"
                         android:background="#DF7401"/>
                     <TextView
                         android:id="@+id/textViewValLugarRequer"
@@ -224,6 +231,7 @@
                         android:text="Usuario:"
                         android:textColor="#111111"
                         android:textStyle="bold"
+                        android:padding="2dp"
                         android:background="#DBA901"/>
                     <TextView
                         android:id="@+id/textViewValUsuarioRequer"
@@ -253,6 +261,7 @@
                         android:text="Descripción:"
                         android:textColor="#111111"
                         android:textStyle="bold"
+                        android:padding="2dp"
                         android:background="#D7DF01"/>
 
                 </LinearLayout>

@@ -111,10 +111,10 @@ public class regincidenciaA extends Activity{
         int hora=today.hour;
         int minutos=today.minute;
         mes=mes+1;
-        String mesS=hora<10?"0"+mes:""+mes;
+        String mesS=mes<10?"0"+mes:""+mes;
         String diaS=dia<10?"0"+dia:""+dia;
         textFecha.setText(diaS+"/"+mesS+"/"+anio+" "+today.format("%k:%M:%S"));
-        fecha=textFecha.getText().toString();
+        fecha=anio+"-"+mesS+"-"+diaS+" "+today.format("%k:%M:%S");
         ///////////////////////////////////////////////////////////////////
 
         /////////////////SETEO DE SPINNER LUGAR////////////////////////////

@@ -166,7 +166,7 @@
                         android:layout_width="0dp"
                         android:layout_weight=".95"
                         android:layout_height="100dp"
-                        android:inputType="textMultiLine"
+                        android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
                         android:hint="Descripcion"
                         android:textSize="15dp"
                         android:gravity="left|top"

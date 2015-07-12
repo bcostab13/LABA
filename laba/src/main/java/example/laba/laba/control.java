@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -184,6 +185,26 @@ public class control extends Activity{
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+        switch (item.getItemId()) {
+            case R.id.MnuActualizar:
+                //actualizar incidencias
+                adapter=new incidenciaAdapter(this,textCuenta);
+                listView.setAdapter(adapter);
+                //actualizar requerimientos
+                adapterR=new requerimientoAdapter(this,textCuentaR);
+                listViewR.setAdapter(adapterR);
+                return true;
+        }
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_actualizar, menu);
+        return true;
+    }
+
+
 }

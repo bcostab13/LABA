@@ -91,6 +91,7 @@
                                         android:gravity="center">
 
                                         <ListView
+                                            android:background="@drawable/lista"
                                             android:layout_width="0dp"
                                             android:layout_height="fill_parent"
                                             android:layout_weight=".95"
@@ -181,6 +182,7 @@
                                         android:gravity="center">
 
                                         <ListView
+                                            android:background="@drawable/lista"
                                             android:layout_width="0dp"
                                             android:layout_height="fill_parent"
                                             android:layout_weight=".95"
