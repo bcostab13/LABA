@@ -112,13 +112,21 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/formContraseña"
                 android:gravity="center_horizontal"
-                android:paddingTop="8dp">
+                android:paddingTop="8dp"
+                android:orientation="vertical">
                 <Button
                     style="@style/BotonOperacion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" Ingresar"
-                    android:id="@+id/button" />
+                    android:id="@+id/button"
+                    android:layout_marginBottom="5dp"/>
+                <Button
+                    style="@style/BotonOperacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Registrarse"
+                    android:id="@+id/buttonRegistrar"/>
             </LinearLayout>
 
         </RelativeLayout>

@@ -485,7 +485,7 @@ public class regincidencia extends Activity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-
+    /////////////////////////////////////////////////////////////////////////////////
 
 
 

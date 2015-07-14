@@ -35,7 +35,7 @@ import java.util.List;
 public class sincronizar extends Activity{
     ImageView iconoPrincipal;
     TextView textoBienvenida;
-    Button botonIniciar;
+    Button botonIniciar,botonRegistrar;
     EditText edituser,editpassword;
     int codigo=0;
     UsuarioGeneral user;
@@ -63,6 +63,7 @@ public class sincronizar extends Activity{
         iconoPrincipal=(ImageView)findViewById(R.id.imageView_inicial);
         textoBienvenida=(TextView)findViewById(R.id.textView_bienvenida);
         botonIniciar=(Button)findViewById(R.id.button);
+        botonRegistrar=(Button)findViewById(R.id.buttonRegistrar);
         edituser=(EditText)findViewById(R.id.editText_user);
         editpassword=(EditText)findViewById(R.id.editText_pass);
 
@@ -148,9 +149,17 @@ public class sincronizar extends Activity{
             user=listaUser.get(0);
         }catch (Exception e){
             //iniciar conexion
-            UsuarioGeneral prueba=new UsuarioGeneral("US0000001","Brenda Costa","administrador");
-            prueba.save();
+            //UsuarioGeneral prueba=new UsuarioGeneral("US0000001","Brenda Costa","administrador");
+            //prueba.save();
         }
+
+        botonRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent lanzar_registrar=new Intent(sincronizar.this,regusuario.class);
+                startActivity(lanzar_registrar);
+            }
+        });
     }
 
     private int parseJsonNum(JSONObject jsonObject) {
