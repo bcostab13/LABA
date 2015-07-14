@@ -24,6 +24,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.List;
+
 /**
  * Created by Brenda on 08/07/2015.
  */
@@ -44,6 +46,8 @@ public class regsolucion extends Activity{
     //agregamos el Administrador de Colas de Peticiones de Volley
     private RequestQueue requestQueue;
     StringRequest jsArrayRequest,jsArrayRequest2;
+    UsuarioGeneral usuarioActual;
+    String tipoUs;
 
 
 
@@ -52,12 +56,22 @@ public class regsolucion extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regsolucion);
 
+        //obtener tipo de usuario
+        List<UsuarioGeneral> listaUser=UsuarioGeneral.listAll(UsuarioGeneral.class);
+        usuarioActual=listaUser.get(0);
+        tipoUs=usuarioActual.getTipo();
+
         //asociamos las variables
         txNombre=(TextView)findViewById(R.id.textViewValNombre);
         txDetalle=(TextView)findViewById(R.id.textViewValDetalle);
         txSintomas=(TextView)findViewById(R.id.textViewValSintomas);
         txSolucion=(TextView)findViewById(R.id.textViewValSolucion);
         btRegistrar=(Button)findViewById(R.id.buttonModSolucion);
+
+        if(tipoUs.equals("alumno")){
+            btRegistrar.setEnabled(false);
+        }
+
 
         //iniciar Volley
         //creamos una nueva cola de peticiones

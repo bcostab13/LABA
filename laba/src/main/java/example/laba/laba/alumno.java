@@ -62,7 +62,7 @@ public class alumno extends Activity{
         izquierdo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Paso de parametro: tipo=",""+tipoUs);
+                Log.d("Paso de parametro:","tipo="+tipoUs);
                 Bundle tipo=new Bundle();
                 tipo.putString("tipo",tipoUs);
                 Intent lanzar_registro=new Intent(alumno.this,regincidenciaA.class).putExtras(tipo).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -1,6 +1,8 @@
 package example.laba.laba;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Brenda on 07/07/2015.
@@ -41,12 +44,19 @@ public class gestionproblemas extends Activity{
     LinearLayout frOpcional;
     String tipop,atrib1,atrib2,atrib3;
     int indAtrib1=0,indAtrib2=0,indAtrib3=0;
+    UsuarioGeneral usuarioActual;
+    String tipoUs;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gestionproblemas);
+
+        //obtener tipo de usuario
+        List<UsuarioGeneral> listaUser=UsuarioGeneral.listAll(UsuarioGeneral.class);
+        usuarioActual=listaUser.get(0);
+        tipoUs=usuarioActual.getTipo();
 
         //asociamos nuestros objetos
         spTipoP=(Spinner)findViewById(R.id.spinnerTipoP);
@@ -225,71 +235,71 @@ public class gestionproblemas extends Activity{
             public void onClick(View view) {
 
 
-            //obtener instancia de la lista
-            listViewR=(ListView)findViewById(R.id.listViewProblemas);
-            //textCuentaR=(TextView)findViewById(R.id.textViewIndContReq);
-            //crear y setear adaptador
-            int pr=1;
-            if(tipop.equals("Red")){
-                pr=2;
-            }else if(tipop.equals("Software")){
-                pr=3;
-            }else if(tipop.equals("Hardware")){
-                pr=1;
-            }else if(tipop.equals("General")){
-                pr=4;
-            }
-            adapterR=new problemaAdapter(gestionproblemas.this,pr);
-            listViewR.setAdapter(adapterR);
-
-            //acciones del clic de solicitud
-            listViewR.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Log.d("ClickList", "LLega hasta aca");
-                    Log.d("Valor de Item Seleccionado","Item="+((Problema)adapterR.getItem(i)).getNombre());
-                    Object auxproblema=adapterR.getItem(i);
-
-                    String nombreP="",sintomasP="",detalleP="",solucionP="";
-
-                    if(auxproblema instanceof PHardware){
-                        Toast.makeText(gestionproblemas.this,"Problema de Hardware",Toast.LENGTH_LONG).show();
-                        nombreP=((PHardware)auxproblema).getNombre();
-                        sintomasP=((PHardware)auxproblema).getSintomas();
-                        detalleP=((PHardware)auxproblema).getDetalle();
-                        solucionP=((PHardware)auxproblema).getSolucion();
-                    }else if(auxproblema instanceof PRed){
-                        Toast.makeText(gestionproblemas.this,"Problema de Red",Toast.LENGTH_LONG).show();
-                        nombreP=((PRed)auxproblema).getNombre();
-                        sintomasP=((PRed)auxproblema).getSintomas();
-                        detalleP=((PRed)auxproblema).getDetalle();
-                        solucionP=((PRed)auxproblema).getSolucion();
-                    }else if(auxproblema instanceof PSoftware){
-                        Toast.makeText(gestionproblemas.this,"Problema de PSoftware",Toast.LENGTH_LONG).show();
-                        nombreP=((PSoftware)auxproblema).getNombre();
-                        sintomasP=((PSoftware)auxproblema).getSintomas();
-                        detalleP=((PSoftware)auxproblema).getDetalle();
-                        solucionP=((PSoftware)auxproblema).getSolucion();
-                    }else if(auxproblema instanceof PUsuario){
-                        Toast.makeText(gestionproblemas.this,"Problema de Usuario",Toast.LENGTH_LONG).show();
-                        nombreP=((PUsuario)auxproblema).getNombre();
-                        sintomasP=((PUsuario)auxproblema).getSintomas();
-                        detalleP=((PUsuario)auxproblema).getDetalle();
-                        solucionP=((PUsuario)auxproblema).getSolucion();
-                    }
-
-
-                    Bundle codS=new Bundle();
-                    codS.putString("nombre",nombreP);
-                    codS.putString("sintomas",sintomasP);
-                    codS.putString("detalle",detalleP);
-                    codS.putString("solucion",solucionP);
-                    codS.putString("tipoP",tipop);
-                    startActivity(new Intent(gestionproblemas.this,regsolucion.class).putExtras(codS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-
-
+                //obtener instancia de la lista
+                listViewR = (ListView) findViewById(R.id.listViewProblemas);
+                //textCuentaR=(TextView)findViewById(R.id.textViewIndContReq);
+                //crear y setear adaptador
+                int pr = 1;
+                if (tipop.equals("Red")) {
+                    pr = 2;
+                } else if (tipop.equals("Software")) {
+                    pr = 3;
+                } else if (tipop.equals("Hardware")) {
+                    pr = 1;
+                } else if (tipop.equals("General")) {
+                    pr = 4;
                 }
-            });
+                adapterR = new problemaAdapter(gestionproblemas.this, pr);
+                listViewR.setAdapter(adapterR);
+
+                //acciones del clic de solicitud
+                listViewR.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Log.d("ClickList", "LLega hasta aca");
+                        Log.d("Item Seleccionado", "Item=" + ((Problema) adapterR.getItem(i)).getNombre());
+                        Object auxproblema = adapterR.getItem(i);
+
+                        String nombreP = "", sintomasP = "", detalleP = "", solucionP = "";
+
+                        if (auxproblema instanceof PHardware) {
+                            Toast.makeText(gestionproblemas.this, "Problema de Hardware", Toast.LENGTH_LONG).show();
+                            nombreP = ((PHardware) auxproblema).getNombre();
+                            sintomasP = ((PHardware) auxproblema).getSintomas();
+                            detalleP = ((PHardware) auxproblema).getDetalle();
+                            solucionP = ((PHardware) auxproblema).getSolucion();
+                        } else if (auxproblema instanceof PRed) {
+                            Toast.makeText(gestionproblemas.this, "Problema de Red", Toast.LENGTH_LONG).show();
+                            nombreP = ((PRed) auxproblema).getNombre();
+                            sintomasP = ((PRed) auxproblema).getSintomas();
+                            detalleP = ((PRed) auxproblema).getDetalle();
+                            solucionP = ((PRed) auxproblema).getSolucion();
+                        } else if (auxproblema instanceof PSoftware) {
+                            Toast.makeText(gestionproblemas.this, "Problema de PSoftware", Toast.LENGTH_LONG).show();
+                            nombreP = ((PSoftware) auxproblema).getNombre();
+                            sintomasP = ((PSoftware) auxproblema).getSintomas();
+                            detalleP = ((PSoftware) auxproblema).getDetalle();
+                            solucionP = ((PSoftware) auxproblema).getSolucion();
+                        } else if (auxproblema instanceof PUsuario) {
+                            Toast.makeText(gestionproblemas.this, "Problema de Usuario", Toast.LENGTH_LONG).show();
+                            nombreP = ((PUsuario) auxproblema).getNombre();
+                            sintomasP = ((PUsuario) auxproblema).getSintomas();
+                            detalleP = ((PUsuario) auxproblema).getDetalle();
+                            solucionP = ((PUsuario) auxproblema).getSolucion();
+                        }
+
+
+                        Bundle codS = new Bundle();
+                        codS.putString("nombre", nombreP);
+                        codS.putString("sintomas", sintomasP);
+                        codS.putString("detalle", detalleP);
+                        codS.putString("solucion", solucionP);
+                        codS.putString("tipoP", tipop);
+                        startActivity(new Intent(gestionproblemas.this, regsolucion.class).putExtras(codS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+
+                    }
+                });
 
 
             }
@@ -373,7 +383,7 @@ public class gestionproblemas extends Activity{
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Log.d("ClickList", "LLega hasta aca");
-                        Log.d("Valor de Item Seleccionado","Item="+((Problema)adapterR.getItem(i)).getNombre());
+                        Log.d("Item Seleccionado","Item="+((Problema)adapterR.getItem(i)).getNombre());
                         Object auxproblema=adapterR.getItem(i);
 
                         String nombreP="",sintomasP="",detalleP="",solucionP="";
@@ -440,43 +450,134 @@ public class gestionproblemas extends Activity{
                 R.string.app_name  //descripción al cerrar
         ) {     };
 
-        //Creamos nuestro menú
-        final String[] opciones = {"Panel de Control", "Nueva Incidencia", "Control de Solicitudes","Control de Laboratorios"};
-        //rellenamos la List view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1, opciones));
+        if(tipoUs.equals("administrador")) {
+            //Creamos nuestro menú
+            final String[] opciones = {"Panel de Control", "Nueva Incidencia", "Control de Solicitudes",
+                    "Control de Laboratorios", "Gestión de Problemas"};
+            //rellenamos la List view
+            mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                    android.R.layout.simple_list_item_1,
+                    android.R.id.text1, opciones));
 
-        //Añadimos la acción que haga en cada fila del
-        //list view. en este caso solo mostraremos un Toast con un mensaje
-        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1,
-                                    int arg2, long arg3) {
-                //Se cierra el menú
-                mDrawerLayout.closeDrawers();
-                if (opciones[arg2].equals("Panel de Control")) {
-                    Intent lanzar_panel = new Intent(gestionproblemas.this, administrador.class);
-                    finish();
-                    startActivity(lanzar_panel);
-                }
-                if (opciones[arg2].equals("Nueva Incidencia")) {
-                    Toast.makeText(gestionproblemas.this, "Ya se encuentra en esta sección", Toast.LENGTH_LONG);
-                }
-                if (opciones[arg2].equals("Control de Solicitudes")) {
-                    Intent lanzar_control = new Intent(gestionproblemas.this, control.class);
-                    finish();
-                    startActivity(lanzar_control);
-                }
-                if (opciones[arg2].equals("Control de Laboratorios")) {
-                    Intent lanzar_controlab = new Intent(gestionproblemas.this, contlab.class);
-                    finish();
-                    startActivity(lanzar_controlab);
-                }
+            //Añadimos la acción que haga en cada fila del
+            //list view. en este caso solo mostraremos un Toast con un mensaje
+            mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> arg0, View arg1,
+                                        int arg2, long arg3) {
+                    //Se cierra el menú
+                    mDrawerLayout.closeDrawers();
+                    if (opciones[arg2].equals("Panel de Control")) {
+                        Intent lanzar_panel = new Intent(gestionproblemas.this, administrador.class);
+                        finish();
+                        startActivity(lanzar_panel);
+                    }
+                    if (opciones[arg2].equals("Nueva Incidencia")) {
+                        Intent lanzar_nuevaIncidencia = new Intent(gestionproblemas.this, regincidencia.class);
+                        finish();
+                        startActivity(lanzar_nuevaIncidencia);
+                    }
+                    if (opciones[arg2].equals("Control de Solicitudes")) {
+                        Intent lanzar_control = new Intent(gestionproblemas.this, control.class);
+                        finish();
+                        startActivity(lanzar_control);
 
-            }
-        });
+                    }
+                    if (opciones[arg2].equals("Control de Laboratorios")) {
+                        final CharSequence[] items = {"Lab 1", "Lab 2", "Lab 3", "Lab 4", "Lab 5", "Lab 6", "Lab 7",
+                                "Lab 8"};
+                        AlertDialog.Builder builder = new AlertDialog.Builder(gestionproblemas.this);
+                        builder.setTitle("Seleccionar Laboratorio");
+                        builder.setItems(items, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int item) {
+                                String ubic = "";
+                                switch (item) {
+                                    case 0:
+                                        ubic = "LAB001";
+                                        break;
+                                    case 1:
+                                        ubic = "LAB002";
+                                        break;
+                                    case 2:
+                                        ubic = "LAB003";
+                                        break;
+                                    case 3:
+                                        ubic = "LAB004";
+                                        break;
+                                    case 4:
+                                        ubic = "LAB005";
+                                        break;
+                                    case 5:
+                                        ubic = "LAB006";
+                                        break;
+                                    case 6:
+                                        ubic = "LAB007";
+                                        break;
+                                    case 7:
+                                        ubic = "LAB008";
+                                        break;
+                                }
+                                Bundle ubicacion = new Bundle();
+                                ubicacion.putString("ub", ubic);
+                                Intent lanzar_contlab = new Intent(gestionproblemas.this, contlab.class);
+                                lanzar_contlab.putExtras(ubicacion);
+                                lanzar_contlab.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(lanzar_contlab);
+                                dialog.cancel();
+                            }
+                        });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                    }
+                    if (opciones[arg2].equals("Gestión de Problemas")) {
+                        //Intent lanzar_gestproblemas = new Intent(gestionproblemas.this, gestionproblemas.class);
+                        //finish();
+                        //startActivity(lanzar_gestproblemas);
+                        Toast.makeText(gestionproblemas.this, "Ya se encuentra en esta sección", Toast.LENGTH_LONG).show();
+                    }
 
+                }
+            });
+        }else{
+            //Creamos nuestro menú
+            final String[] opciones = {"Panel de Control", "Nueva Incidencia", "Nuevo Requerimiento",
+                    "Diagnóstico"};
+            //rellenamos la List view
+            mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                    android.R.layout.simple_list_item_1,
+                    android.R.id.text1, opciones));
+
+            //Añadimos la acción que haga en cada fila del
+            //list view. en este caso solo mostraremos un Toast con un mensaje
+            mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> arg0, View arg1,
+                                        int arg2, long arg3) {
+                    //Se cierra el menú
+                    mDrawerLayout.closeDrawers();
+                    if (opciones[arg2].equals("Panel de Control")) {
+                        Intent lanzar_panel = new Intent(gestionproblemas.this, alumno.class);
+                        finish();
+                        startActivity(lanzar_panel);
+                    }
+                    if (opciones[arg2].equals("Nueva Incidencia")) {
+                        Intent lanzar_nuevaIncidencia = new Intent(gestionproblemas.this, regincidenciaA.class);
+                        finish();
+                        startActivity(lanzar_nuevaIncidencia);
+                    }
+                    if (opciones[arg2].equals("Nuevo Requerimiento")) {
+                        Intent lanzar_nuevoRequerimiento = new Intent(gestionproblemas.this, regrequerimientoA.class);
+                        finish();
+                        startActivity(lanzar_nuevoRequerimiento);
+                    }
+                    if (opciones[arg2].equals("Diagnóstico")) {
+                        Toast.makeText(gestionproblemas.this, "Ya se encuentra en esta sección", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            });
+
+        }
         //Mostramos el botón en la barra de la aplicación
         getActionBar().setDisplayHomeAsUpEnabled(true);
         //Activamso el click en el icono de la aplicación

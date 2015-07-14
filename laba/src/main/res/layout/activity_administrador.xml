@@ -55,7 +55,8 @@
             android:layout_marginTop="100dp"
             android:layout_height="50dp"
             android:background="@drawable/panelbutton"
-            android:drawableLeft="@drawable/volcanoic"
+            android:drawableLeft="@drawable/ic_incr"
+            android:paddingLeft="10dp"
             android:text="Nueva Incidencia"
             android:layout_alignParentLeft="true"/>
     </LinearLayout>
@@ -76,7 +77,8 @@
             android:layout_weight="0.7"
             android:layout_height="50dp"
             android:background="@drawable/panelbutton"
-            android:drawableRight="@drawable/volcanoic"
+            android:drawableRight="@drawable/ic_control2"
+            android:paddingRight="10dp"
             android:text="Control de Solicitudes"
             />
     </LinearLayout>
@@ -95,7 +97,8 @@
             android:layout_weight="0.7"
             android:layout_height="50dp"
             android:background="@drawable/panelbutton"
-            android:drawableLeft="@drawable/volcanoic"
+            android:drawableLeft="@drawable/ic_incid"
+            android:paddingLeft="10dp"
             android:text="Control de Laboratorios"
             android:layout_alignParentLeft="true"/>
     </LinearLayout>
@@ -116,7 +119,8 @@
             android:layout_weight="0.7"
             android:layout_height="50dp"
             android:background="@drawable/panelbutton"
-            android:drawableRight="@drawable/volcanoic"
+            android:drawableRight="@drawable/ic_prob"
+            android:paddingRight="10dp"
             android:text="Gestión de Problemas"
             />
     </LinearLayout>

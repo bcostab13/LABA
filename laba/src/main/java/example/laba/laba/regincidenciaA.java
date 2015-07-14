@@ -1,6 +1,7 @@
 package example.laba.laba;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -12,6 +13,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.text.format.Time;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -208,7 +210,8 @@ public class regincidenciaA extends Activity{
         ) {     };
 
         //Creamos nuestro menú
-        final String[] opciones = {"Panel de Control", "Nueva Incidencia", "Control de Solicitudes","Control de Laboratorios","Salir"};
+        final String[] opciones = {"Panel de Control", "Nueva Incidencia", "Nuevo Requerimiento",
+                "Diagnóstico"};
         //rellenamos la List view
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,
@@ -220,15 +223,29 @@ public class regincidenciaA extends Activity{
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,
                                     int arg2, long arg3) {
-                Toast.makeText(regincidenciaA.this, "id: " + opciones[arg2],
-                        Toast.LENGTH_SHORT).show();
                 //Se cierra el menú
                 mDrawerLayout.closeDrawers();
-                if(opciones[arg2].equals("Control de Solicitudes")){
-                    //Intent lanzar_control=new Intent(regincidencia.this,control.class);
-                    //finish();
-                    //startActivity(lanzar_control);
+                if (opciones[arg2].equals("Panel de Control")) {
+                    Intent lanzar_panel = new Intent(regincidenciaA.this, alumno.class);
+                    finish();
+                    startActivity(lanzar_panel);
                 }
+                if (opciones[arg2].equals("Nueva Incidencia")) {
+                    Toast.makeText(regincidenciaA.this, "Ya se encuentra en esta sección", Toast.LENGTH_LONG).show();
+                }
+                if (opciones[arg2].equals("Nuevo Requerimiento")) {
+
+                    Intent lanzar_nuevoRequerimiento = new Intent(regincidenciaA.this, regrequerimientoA.class);
+                    finish();
+                    startActivity(lanzar_nuevoRequerimiento);
+                }
+                if (opciones[arg2].equals("Diagnóstico")) {
+                    Intent lanzar_gestproblemas = new Intent(regincidenciaA.this, gestionproblemas.class);
+                    finish();
+                    startActivity(lanzar_gestproblemas);
+
+                }
+
             }
         });
 
@@ -272,6 +289,18 @@ public class regincidenciaA extends Activity{
             @Override
             public void onClick(View view) {
                 if (conexionInternet()) {
+
+                    //mostrar progreso
+                    LayoutInflater inflater = getLayoutInflater();
+
+                    View dialoglayout = inflater.inflate(R.layout.dialog_cargando, null);
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(regincidenciaA.this);
+                    builder.setView(dialoglayout);
+                    //builder.show();
+                    final AlertDialog dialog=builder.create();
+                    dialog.show();
+
+
 
                     try {
 
@@ -341,6 +370,7 @@ public class regincidenciaA extends Activity{
                                                     @Override
                                                     public void onResponse(String response) {
                                                         Toast.makeText(regincidenciaA.this,"Incidencia Registrada",Toast.LENGTH_LONG).show();
+                                                        dialog.cancel();
                                                         textDesc.setText("");
                                                         spinnerLug.setSelection(0);
                                                         spinnerCat.setSelection(0);
@@ -357,7 +387,7 @@ public class regincidenciaA extends Activity{
 
                                                     @Override
                                                     public void onErrorResponse(VolleyError error) {
-
+                                                        dialog.cancel();
                                                     }
                                                 }
                                         ) ;
@@ -369,7 +399,7 @@ public class regincidenciaA extends Activity{
 
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
-
+                                        dialog.cancel();
                                     }
                                 }
                         );

@@ -1,6 +1,7 @@
 package example.laba.laba;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.text.format.Time;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -131,10 +133,10 @@ public class regrequerimientoA extends Activity {
         int hora=today.hour;
         int minutos=today.minute;
         mes=mes+1;
-        String mesS=hora<10?"0"+mes:""+mes;
+        String mesS=mes<10?"0"+mes:""+mes;
         String diaS=dia<10?"0"+dia:""+dia;
         textFecha.setText(diaS+"/"+mesS+"/"+anio+" "+today.format("%k:%M:%S"));
-        fecha=textFecha.getText().toString();
+        fecha=anio+"-"+mesS+"-"+diaS+" "+today.format("%k:%M:%S");
         ///////////////////////////////////////////////////////////////////
 
         /////////////////SETEO DE SPINNER LUGAR////////////////////////////
@@ -228,8 +230,8 @@ public class regrequerimientoA extends Activity {
                 R.string.app_name  //descripción al cerrar
         ) {     };
 
-        //Creamos nuestro menú
-        final String[] opciones = {"Panel de Control", "Nueva Incidencia", "Control de Solicitudes","Control de Laboratorios","Salir"};
+        final String[] opciones = {"Panel de Control", "Nueva Incidencia", "Nuevo Requerimiento",
+                "Diagnóstico"};
         //rellenamos la List view
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,
@@ -241,15 +243,29 @@ public class regrequerimientoA extends Activity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,
                                     int arg2, long arg3) {
-                Toast.makeText(regrequerimientoA.this, "id: " + opciones[arg2],
-                        Toast.LENGTH_SHORT).show();
                 //Se cierra el menú
                 mDrawerLayout.closeDrawers();
-                if(opciones[arg2].equals("Control de Solicitudes")){
-                    //Intent lanzar_control=new Intent(regincidencia.this,control.class);
-                    //finish();
-                    //startActivity(lanzar_control);
+                if (opciones[arg2].equals("Panel de Control")) {
+                    Intent lanzar_panel = new Intent(regrequerimientoA.this, alumno.class);
+                    finish();
+                    startActivity(lanzar_panel);
                 }
+                if (opciones[arg2].equals("Nueva Incidencia")) {
+                    Intent lanzar_nuevaIncidencia = new Intent(regrequerimientoA.this, regincidenciaA.class);
+                    finish();
+                    startActivity(lanzar_nuevaIncidencia);
+                }
+                if (opciones[arg2].equals("Nuevo Requerimiento")) {
+                    Toast.makeText(regrequerimientoA.this, "Ya se encuentra en esta sección", Toast.LENGTH_LONG).show();
+
+                }
+                if (opciones[arg2].equals("Diagnóstico")) {
+                    Intent lanzar_gestproblemas = new Intent(regrequerimientoA.this, gestionproblemas.class);
+                    finish();
+                    startActivity(lanzar_gestproblemas);
+
+                }
+
             }
         });
 
@@ -323,6 +339,16 @@ public class regrequerimientoA extends Activity {
 
                 if (conexionInternet()) {
 
+                    //mostrar progreso
+                    LayoutInflater inflater = getLayoutInflater();
+
+                    View dialoglayout = inflater.inflate(R.layout.dialog_cargando, null);
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(regrequerimientoA.this);
+                    builder.setView(dialoglayout);
+                    //builder.show();
+                    final AlertDialog dialog=builder.create();
+                    dialog.show();
+
                     //obtenemos el numero de la ultima solicitud del usuario
                     direccion = URL_BASE + URL_JSON_ULT + user.getCodigo();
                     direccion = direccion.replace(" ", "%20");
@@ -377,6 +403,7 @@ public class regrequerimientoA extends Activity {
                                                 @Override
                                                 public void onResponse(String response) {
                                                     Toast.makeText(regrequerimientoA.this, "Requerimiento Registrado", Toast.LENGTH_LONG).show();
+                                                    dialog.cancel();
                                                     textDesc.setText("");
                                                     lugar="Dentro de la Facultad";
                                                     cat="Instalación de Software";
@@ -392,7 +419,7 @@ public class regrequerimientoA extends Activity {
 
                                                 @Override
                                                 public void onErrorResponse(VolleyError error) {
-
+                                                    dialog.cancel();
                                                 }
                                             }
                                     );
@@ -405,7 +432,7 @@ public class regrequerimientoA extends Activity {
 
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
-
+                                        dialog.cancel();
                                     }
                                 }
                             );

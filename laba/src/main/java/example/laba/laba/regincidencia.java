@@ -7,6 +7,7 @@ package example.laba.laba;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
@@ -161,7 +162,8 @@ public class regincidencia extends Activity {
         ) {     };
 
         //Creamos nuestro menú
-        final String[] opciones = {"Panel de Control", "Nueva Incidencia", "Control de Solicitudes","Control de Laboratorios"};
+        final String[] opciones = {"Panel de Control", "Nueva Incidencia", "Control de Solicitudes",
+                "Control de Laboratorios","Gestión de Problemas"};
         //rellenamos la List view
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,
@@ -181,7 +183,10 @@ public class regincidencia extends Activity {
                     startActivity(lanzar_panel);
                 }
                 if (opciones[arg2].equals("Nueva Incidencia")) {
-                    Toast.makeText(regincidencia.this, "Ya se encuentra en esta sección", Toast.LENGTH_LONG);
+                    //Intent lanzar_nuevaIncidencia=new Intent(regincidencia.this,regincidencia.class);
+                    //finish();
+                    //startActivity(lanzar_nuevaIncidencia);
+                    Toast.makeText(regincidencia.this, "Ya se encuentra en esta sección", Toast.LENGTH_LONG).show();
                 }
                 if (opciones[arg2].equals("Control de Solicitudes")) {
                     Intent lanzar_control = new Intent(regincidencia.this, control.class);
@@ -189,9 +194,55 @@ public class regincidencia extends Activity {
                     startActivity(lanzar_control);
                 }
                 if (opciones[arg2].equals("Control de Laboratorios")) {
-                    Intent lanzar_controlab = new Intent(regincidencia.this, contlab.class);
+                    final CharSequence[] items = {"Lab 1", "Lab 2", "Lab 3", "Lab 4","Lab 5","Lab 6","Lab 7",
+                            "Lab 8"};
+                    AlertDialog.Builder builder = new AlertDialog.Builder(regincidencia.this);
+                    builder.setTitle("Seleccionar Laboratorio");
+                    builder.setItems(items, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int item) {
+                            String ubic = "";
+                            switch (item) {
+                                case 0:
+                                    ubic = "LAB001";
+                                    break;
+                                case 1:
+                                    ubic = "LAB002";
+                                    break;
+                                case 2:
+                                    ubic = "LAB003";
+                                    break;
+                                case 3:
+                                    ubic = "LAB004";
+                                    break;
+                                case 4:
+                                    ubic = "LAB005";
+                                    break;
+                                case 5:
+                                    ubic = "LAB006";
+                                    break;
+                                case 6:
+                                    ubic = "LAB007";
+                                    break;
+                                case 7:
+                                    ubic = "LAB008";
+                                    break;
+                            }
+                            Bundle ubicacion = new Bundle();
+                            ubicacion.putString("ub", ubic);
+                            Intent lanzar_contlab = new Intent(regincidencia.this, contlab.class);
+                            lanzar_contlab.putExtras(ubicacion);
+                            lanzar_contlab.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(lanzar_contlab);
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+                if (opciones[arg2].equals("Gestión de Problemas")) {
+                    Intent lanzar_gestproblemas = new Intent(regincidencia.this, gestionproblemas.class);
                     finish();
-                    startActivity(lanzar_controlab);
+                    startActivity(lanzar_gestproblemas);
                 }
 
             }
@@ -333,7 +384,7 @@ public class regincidencia extends Activity {
 
                                                     @Override
                                                     public void onErrorResponse(VolleyError error) {
-
+                                                        dialog.cancel();
                                                     }
                                                 }
                                         ) ;
@@ -345,7 +396,7 @@ public class regincidencia extends Activity {
 
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
-
+                                        dialog.cancel();
                                     }
                                 }
                         );
